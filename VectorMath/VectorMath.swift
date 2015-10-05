@@ -637,7 +637,7 @@ extension InstantiableQuaternionType {
     return t1 + t2
   }
 
-  init(axisAngle: Vector4Type) {
+  init(__axisAngle axisAngle: Vector4Type) {
     let r = axisAngle.__w * 0.5
     let scale = sin(r)
     let xyzVector: Vector3 = axisAngle.xyz()
@@ -645,7 +645,7 @@ extension InstantiableQuaternionType {
     self.init(__x: a.__x, __y: a.__y, __z: a.__z, __w: cos(r))
   }
 
-  init(pitch: Scalar, yaw: Scalar, roll: Scalar) {
+  init(__pitch pitch: Scalar, __yaw yaw: Scalar, __roll roll: Scalar) {
     let sy = sin(yaw * 0.5)
     let cy = cos(yaw * 0.5)
     let sz = sin(roll * 0.5)
@@ -661,7 +661,7 @@ extension InstantiableQuaternionType {
     )
   }
 
-  init(rotationMatrix m: Matrix4Type) {
+  init(__rotationMatrix m: Matrix4Type) {
     let diagonal = m.__m11 + m.__m22 + m.__m33 + 1
     if diagonal ~= 0 {
       let scale = sqrt(diagonal) * 2
@@ -794,7 +794,7 @@ extension InstantiableMatrix3Type {
     )
   }
 
-  init(scale: Vector2Type) {
+  init(__scale scale: Vector2Type) {
     self.init(
       __m11: scale.__x, __m12: 0, __m13: 0,
       __m21: 0, __m22: scale.__y, __m23: 0,
@@ -802,7 +802,7 @@ extension InstantiableMatrix3Type {
     )
   }
 
-  init(translation: Vector2Type) {
+  init(__translation translation: Vector2Type) {
     self.init(
       __m11: 1, __m12: 0, __m13: 0,
       __m21: 0, __m22: 1, __m23: 0,
@@ -810,7 +810,7 @@ extension InstantiableMatrix3Type {
     )
   }
 
-  init(rotation radians: Scalar) {
+  init(__rotation radians: Scalar) {
     let cs = cos(radians)
     let sn = sin(radians)
     self.init(
@@ -1009,7 +1009,7 @@ extension InstantiableMatrix4Type {
     return adjugate * (1 / determinant)
   }
 
-  init(scale s: Vector3Type) {
+  init(__scale s: Vector3Type) {
     self.init(
       __m11: s.__x, __m12: 0, __m13: 0, __m14: 0,
       __m21: 0, __m22: s.__y, __m23: 0, __m24: 0,
@@ -1018,7 +1018,7 @@ extension InstantiableMatrix4Type {
     )
   }
 
-  init(translation t: Vector3Type) {
+  init(__translation t: Vector3Type) {
     self.init(
       __m11: 1, __m12: 0, __m13: 0, __m14: 0,
       __m21: 0, __m22: 1, __m23: 0, __m24: 0,
@@ -1027,11 +1027,11 @@ extension InstantiableMatrix4Type {
     )
   }
 
-  init(rotation axisAngle: Vector4Type) {
-    self.init(quaternion: Quaternion(axisAngle: axisAngle))
+  init(__rotation axisAngle: Vector4Type) {
+    self.init(__quaternion: Quaternion(axisAngle: axisAngle))
   }
 
-  init(quaternion q: QuaternionType) {
+  init(__quaternion q: QuaternionType) {
     self.init(
       __m11: 1 - 2 * (q.__y * q.__y + q.__z * q.__z), __m12: 2 * (q.__x * q.__y + q.__z * q.__w),
       __m13: 2 * (q.__x * q.__z - q.__y * q.__w), __m14: 0,
@@ -1046,15 +1046,15 @@ extension InstantiableMatrix4Type {
     )
   }
 
-  init(fovx: Scalar, fovy: Scalar, near: Scalar, far: Scalar) {
-    self.init(fovy: fovy, aspect: fovx / fovy, near: near, far: far)
+  init(__fovx fovx: Scalar, __fovy fovy: Scalar, __near near: Scalar, __far far: Scalar) {
+    self.init(__fovy: fovy, __aspect: fovx / fovy, __near: near, __far: far)
   }
 
-  init(fovx: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
-    self.init(fovy: fovx / aspect, aspect: aspect, near: near, far: far)
+  init(__fovx fovx: Scalar, __aspect aspect: Scalar, __near near: Scalar, __far far: Scalar) {
+    self.init(__fovy: fovx / aspect, __aspect: aspect, __near: near, __far: far)
   }
 
-  init(fovy: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+  init(__fovy fovy: Scalar, __aspect aspect: Scalar, __near near: Scalar, __far far: Scalar) {
     let dz = far - near
 
     assert(dz > 0, "far value must be greater than near")
@@ -1072,7 +1072,9 @@ extension InstantiableMatrix4Type {
     )
   }
 
-  init(top: Scalar, right: Scalar, bottom: Scalar, left: Scalar, near: Scalar, far: Scalar) {
+  init(__top top: Scalar, __right right: Scalar, __bottom bottom: Scalar, __left left: Scalar,
+    __near near: Scalar, __far far: Scalar) {
+
     let dx = right - left
     let dy = top - bottom
     let dz = far - near
@@ -1404,6 +1406,18 @@ extension Quaternion: InstantiableQuaternionType {
   init(__x: Scalar, __y: Scalar, __z: Scalar, __w: Scalar) {
     self.init(__x, __y, __z, __w)
   }
+
+  init(axisAngle: Vector4Type) {
+    self.init(__axisAngle: axisAngle)
+  }
+
+  init(pitch: Scalar, yaw: Scalar, roll: Scalar) {
+    self.init(__pitch: pitch, __yaw: yaw, __roll: roll)
+  }
+
+  init(rotationMatrix: Matrix4Type) {
+    self.init(__rotationMatrix: rotationMatrix)
+  }
 }
 
 extension Matrix3: InstantiableMatrix3Type {
@@ -1417,6 +1431,18 @@ extension Matrix3: InstantiableMatrix3Type {
       __m21, __m22, __m23,
       __m31, __m32, __m33
     )
+  }
+
+  init(scale: Vector2Type) {
+    self.init(__scale: scale)
+  }
+
+  init(translation: Vector2Type) {
+    self.init(__translation: translation)
+  }
+
+  init(rotation: Scalar) {
+    self.init(__rotation: rotation)
   }
 }
 
@@ -1433,6 +1459,38 @@ extension Matrix4: InstantiableMatrix4Type {
       __m31, __m32, __m33, __m34,
       __m41, __m42, __m43, __m44
     )
+  }
+
+  init(scale: Vector3Type) {
+    self.init(__scale: scale)
+  }
+
+  init(translation: Vector3Type) {
+    self.init(__translation: translation)
+  }
+
+  init(rotation: Vector4Type) {
+    self.init(__rotation: rotation)
+  }
+
+  init(quaternion: QuaternionType) {
+    self.init(__quaternion: quaternion)
+  }
+
+  init(fovx: Scalar, fovy: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovx: fovx, __fovy: fovy, __near: near, __far: far)
+  }
+
+  init(fovx: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovx: fovx, __aspect: aspect, __near: near, __far: far)
+  }
+
+  init(fovy: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovy: fovy, __aspect: aspect, __near: near, __far: far)
+  }
+
+  init(top: Scalar, right: Scalar, bottom: Scalar, left: Scalar, near: Scalar, far: Scalar) {
+    self.init(__top: top, __right: right, __bottom: bottom, __left: left, __near: near, __far: far)
   }
 }
 

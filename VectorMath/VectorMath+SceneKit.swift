@@ -79,7 +79,19 @@ extension SCNVector4: InstantiableVector4Type {
   }
 }
 
-extension SCNQuaternion : InstantiableQuaternionType {}
+extension SCNQuaternion : InstantiableQuaternionType {
+  init(axisAngle: Vector4Type) {
+    self.init(__axisAngle: axisAngle)
+  }
+
+  init(pitch: Scalar, yaw: Scalar, roll: Scalar) {
+    self.init(__pitch: pitch, __yaw: yaw, __roll: roll)
+  }
+
+  init(rotationMatrix: Matrix4Type) {
+    self.init(__rotationMatrix: rotationMatrix)
+  }
+}
 
 extension SCNMatrix4 : InstantiableMatrix4Type {
   init(
@@ -94,6 +106,38 @@ extension SCNMatrix4 : InstantiableMatrix4Type {
       m31: Float(__m31), m32: Float(__m32), m33: Float(__m33), m34: Float(__m34),
       m41: Float(__m41), m42: Float(__m42), m43: Float(__m43), m44: Float(__m44)
     )
+  }
+
+  init(scale: Vector3Type) {
+    self.init(__scale: scale)
+  }
+
+  init(translation: Vector3Type) {
+    self.init(__translation: translation)
+  }
+
+  init(rotation: Vector4Type) {
+    self.init(__rotation: rotation)
+  }
+
+  init(quaternion: QuaternionType) {
+    self.init(__quaternion: quaternion)
+  }
+
+  init(fovx: Scalar, fovy: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovx: fovx, __fovy: fovy, __near: near, __far: far)
+  }
+
+  init(fovx: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovx: fovx, __aspect: aspect, __near: near, __far: far)
+  }
+
+  init(fovy: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovy: fovy, __aspect: aspect, __near: near, __far: far)
+  }
+
+  init(top: Scalar, right: Scalar, bottom: Scalar, left: Scalar, near: Scalar, far: Scalar) {
+    self.init(__top: top, __right: right, __bottom: bottom, __left: left, __near: near, __far: far)
   }
 }
 

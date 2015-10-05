@@ -110,6 +110,18 @@ extension CGAffineTransform: InstantiableMatrix3Type {
       tx: CGFloat(__m31), ty: CGFloat(__m32)
     )
   }
+
+  init(scale: Vector2Type) {
+    self.init(__scale: scale)
+  }
+
+  init(translation: Vector2Type) {
+    self.init(__translation: translation)
+  }
+
+  init(rotation: Scalar) {
+    self.init(__rotation: rotation)
+  }
 }
 
 extension CATransform3D: InstantiableMatrix4Type {
@@ -124,6 +136,38 @@ extension CATransform3D: InstantiableMatrix4Type {
       m31: CGFloat(__m31), m32: CGFloat(__m32), m33: CGFloat(__m33), m34: CGFloat(__m34),
       m41: CGFloat(__m41), m42: CGFloat(__m42), m43: CGFloat(__m43), m44: CGFloat(__m44)
     )
+  }
+
+  init(scale: Vector3Type) {
+    self.init(__scale: scale)
+  }
+
+  init(translation: Vector3Type) {
+    self.init(__translation: translation)
+  }
+
+  init(rotation: Vector4Type) {
+    self.init(__rotation: rotation)
+  }
+
+  init(quaternion: QuaternionType) {
+    self.init(__quaternion: quaternion)
+  }
+
+  init(fovx: Scalar, fovy: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovx: fovx, __fovy: fovy, __near: near, __far: far)
+  }
+
+  init(fovx: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovx: fovx, __aspect: aspect, __near: near, __far: far)
+  }
+
+  init(fovy: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    self.init(__fovy: fovy, __aspect: aspect, __near: near, __far: far)
+  }
+
+  init(top: Scalar, right: Scalar, bottom: Scalar, left: Scalar, near: Scalar, far: Scalar) {
+    self.init(__top: top, __right: right, __bottom: bottom, __left: left, __near: near, __far: far)
   }
 }
 
