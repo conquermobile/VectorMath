@@ -98,9 +98,7 @@ protocol InstantiableVector4Type: Vector4Type {
   init(_x: Scalar, _y: Scalar, _z: Scalar, _w: Scalar)
 }
 
-protocol InstantiableQuaternionType: QuaternionType, InstantiableVector4Type {
-  init(_x: Scalar, _y: Scalar, _z: Scalar, _w: Scalar)
-}
+protocol InstantiableQuaternionType: QuaternionType, InstantiableVector4Type {}
 
 protocol InstantiableMatrix3Type: Matrix3Type {
   init(
