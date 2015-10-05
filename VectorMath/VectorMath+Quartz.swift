@@ -36,93 +36,93 @@ import QuartzCore
 //MARK: Quartz extensions
 
 extension CGPoint: Vector2Type {
-  var _x: Scalar { return Scalar(x) }
-  var _y: Scalar { return Scalar(y) }
+  var __x: Scalar { return Scalar(x) }
+  var __y: Scalar { return Scalar(y) }
 }
 
 extension CGVector: Vector2Type {
-  var _x: Scalar { return Scalar(dx) }
-  var _y: Scalar { return Scalar(dy) }
+  var __x: Scalar { return Scalar(dx) }
+  var __y: Scalar { return Scalar(dy) }
 }
 
 extension CGSize: Vector2Type {
-  var _x: Scalar { return Scalar(width) }
-  var _y: Scalar { return Scalar(height) }
+  var __x: Scalar { return Scalar(width) }
+  var __y: Scalar { return Scalar(height) }
 }
 
 extension CGPoint: InstantiableVector2Type {
-  init(_x: Scalar, _y: Scalar) {
-    self.init(x: CGFloat(_x), y: CGFloat(_y))
+  init(__x: Scalar, __y: Scalar) {
+    self.init(x: CGFloat(__x), y: CGFloat(__y))
   }
 }
 
 extension CGVector: InstantiableVector2Type {
-  init(_x: Scalar, _y: Scalar) {
-    self.init(dx: CGFloat(_x), dy: CGFloat(_y))
+  init(__x: Scalar, __y: Scalar) {
+    self.init(dx: CGFloat(__x), dy: CGFloat(__y))
   }
 }
 
 extension CGSize: InstantiableVector2Type {
-  init(_x: Scalar, _y: Scalar) {
-    self.init(width: CGFloat(_x), height: CGFloat(_y))
+  init(__x: Scalar, __y: Scalar) {
+    self.init(width: CGFloat(__x), height: CGFloat(__y))
   }
 }
 
 extension CGAffineTransform: Matrix3Type {
-  var _m11: Scalar { return Scalar(a) }
-  var _m12: Scalar { return Scalar(b) }
-  var _m13: Scalar { return Scalar(0) }
-  var _m21: Scalar { return Scalar(c) }
-  var _m22: Scalar { return Scalar(d) }
-  var _m23: Scalar { return Scalar(0) }
-  var _m31: Scalar { return Scalar(tx) }
-  var _m32: Scalar { return Scalar(ty) }
-  var _m33: Scalar { return Scalar(1) }
+  var __m11: Scalar { return Scalar(a) }
+  var __m12: Scalar { return Scalar(b) }
+  var __m13: Scalar { return Scalar(0) }
+  var __m21: Scalar { return Scalar(c) }
+  var __m22: Scalar { return Scalar(d) }
+  var __m23: Scalar { return Scalar(0) }
+  var __m31: Scalar { return Scalar(tx) }
+  var __m32: Scalar { return Scalar(ty) }
+  var __m33: Scalar { return Scalar(1) }
 }
 
 extension CGAffineTransform: InstantiableMatrix3Type {
   init(
-    _m11: Scalar, _m12: Scalar, _m13: Scalar,
-    _m21: Scalar, _m22: Scalar, _m23: Scalar,
-    _m31: Scalar, _m32: Scalar, _m33: Scalar) {
+    __m11: Scalar, __m12: Scalar, __m13: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar) {
     self.init(
-      a: CGFloat(_m11), b: CGFloat(_m12),
-      c: CGFloat(_m21), d: CGFloat(_m22),
-      tx: CGFloat(_m31), ty: CGFloat(_m32)
+      a: CGFloat(__m11), b: CGFloat(__m12),
+      c: CGFloat(__m21), d: CGFloat(__m22),
+      tx: CGFloat(__m31), ty: CGFloat(__m32)
     )
   }
 }
 
 extension CATransform3D: Matrix4Type {
-  var _m11: Scalar { return Scalar(m11) }
-  var _m12: Scalar { return Scalar(m12) }
-  var _m13: Scalar { return Scalar(m13) }
-  var _m14: Scalar { return Scalar(m14) }
-  var _m21: Scalar { return Scalar(m21) }
-  var _m22: Scalar { return Scalar(m22) }
-  var _m23: Scalar { return Scalar(m23) }
-  var _m24: Scalar { return Scalar(m24) }
-  var _m31: Scalar { return Scalar(m31) }
-  var _m32: Scalar { return Scalar(m32) }
-  var _m33: Scalar { return Scalar(m33) }
-  var _m34: Scalar { return Scalar(m34) }
-  var _m41: Scalar { return Scalar(m41) }
-  var _m42: Scalar { return Scalar(m42) }
-  var _m43: Scalar { return Scalar(m43) }
-  var _m44: Scalar { return Scalar(m44) }
+  var __m11: Scalar { return Scalar(m11) }
+  var __m12: Scalar { return Scalar(m12) }
+  var __m13: Scalar { return Scalar(m13) }
+  var __m14: Scalar { return Scalar(m14) }
+  var __m21: Scalar { return Scalar(m21) }
+  var __m22: Scalar { return Scalar(m22) }
+  var __m23: Scalar { return Scalar(m23) }
+  var __m24: Scalar { return Scalar(m24) }
+  var __m31: Scalar { return Scalar(m31) }
+  var __m32: Scalar { return Scalar(m32) }
+  var __m33: Scalar { return Scalar(m33) }
+  var __m34: Scalar { return Scalar(m34) }
+  var __m41: Scalar { return Scalar(m41) }
+  var __m42: Scalar { return Scalar(m42) }
+  var __m43: Scalar { return Scalar(m43) }
+  var __m44: Scalar { return Scalar(m44) }
 }
 
 extension CATransform3D: InstantiableMatrix4Type {
   init(
-    _m11: Scalar, _m12: Scalar, _m13: Scalar, _m14: Scalar,
-    _m21: Scalar, _m22: Scalar, _m23: Scalar, _m24: Scalar,
-    _m31: Scalar, _m32: Scalar, _m33: Scalar, _m34: Scalar,
-    _m41: Scalar, _m42: Scalar, _m43: Scalar, _m44: Scalar) {
+    __m11: Scalar, __m12: Scalar, __m13: Scalar, __m14: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar, __m24: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar, __m34: Scalar,
+    __m41: Scalar, __m42: Scalar, __m43: Scalar, __m44: Scalar) {
     self.init(
-      m11: CGFloat(_m11), m12: CGFloat(_m12), m13: CGFloat(_m13), m14: CGFloat(_m14),
-      m21: CGFloat(_m21), m22: CGFloat(_m22), m23: CGFloat(_m23), m24: CGFloat(_m24),
-      m31: CGFloat(_m31), m32: CGFloat(_m32), m33: CGFloat(_m33), m34: CGFloat(_m34),
-      m41: CGFloat(_m41), m42: CGFloat(_m42), m43: CGFloat(_m43), m44: CGFloat(_m44)
+      m11: CGFloat(__m11), m12: CGFloat(__m12), m13: CGFloat(__m13), m14: CGFloat(__m14),
+      m21: CGFloat(__m21), m22: CGFloat(__m22), m23: CGFloat(__m23), m24: CGFloat(__m24),
+      m31: CGFloat(__m31), m32: CGFloat(__m32), m33: CGFloat(__m33), m34: CGFloat(__m34),
+      m41: CGFloat(__m41), m42: CGFloat(__m42), m43: CGFloat(__m43), m44: CGFloat(__m44)
     )
   }
 }

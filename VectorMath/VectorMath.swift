@@ -36,84 +36,84 @@ import Foundation
 //MARK: Protocols
 
 protocol Vector2Type {
-  var _x: Scalar { get }
-  var _y: Scalar { get }
+  var __x: Scalar { get }
+  var __y: Scalar { get }
 }
 
 protocol Vector3Type {
-  var _x: Scalar { get }
-  var _y: Scalar { get }
-  var _z: Scalar { get }
+  var __x: Scalar { get }
+  var __y: Scalar { get }
+  var __z: Scalar { get }
 }
 
 protocol Vector4Type {
-  var _x: Scalar { get }
-  var _y: Scalar { get }
-  var _z: Scalar { get }
-  var _w: Scalar { get }
+  var __x: Scalar { get }
+  var __y: Scalar { get }
+  var __z: Scalar { get }
+  var __w: Scalar { get }
 }
 
 protocol QuaternionType: Vector4Type {}
 
 protocol Matrix3Type {
-  var _m11: Scalar { get }
-  var _m12: Scalar { get }
-  var _m13: Scalar { get }
-  var _m21: Scalar { get }
-  var _m22: Scalar { get }
-  var _m23: Scalar { get }
-  var _m31: Scalar { get }
-  var _m32: Scalar { get }
-  var _m33: Scalar { get }
+  var __m11: Scalar { get }
+  var __m12: Scalar { get }
+  var __m13: Scalar { get }
+  var __m21: Scalar { get }
+  var __m22: Scalar { get }
+  var __m23: Scalar { get }
+  var __m31: Scalar { get }
+  var __m32: Scalar { get }
+  var __m33: Scalar { get }
 }
 
 protocol Matrix4Type {
-  var _m11: Scalar { get }
-  var _m12: Scalar { get }
-  var _m13: Scalar { get }
-  var _m14: Scalar { get }
-  var _m21: Scalar { get }
-  var _m22: Scalar { get }
-  var _m23: Scalar { get }
-  var _m24: Scalar { get }
-  var _m31: Scalar { get }
-  var _m32: Scalar { get }
-  var _m33: Scalar { get }
-  var _m34: Scalar { get }
-  var _m41: Scalar { get }
-  var _m42: Scalar { get }
-  var _m43: Scalar { get }
-  var _m44: Scalar { get }
+  var __m11: Scalar { get }
+  var __m12: Scalar { get }
+  var __m13: Scalar { get }
+  var __m14: Scalar { get }
+  var __m21: Scalar { get }
+  var __m22: Scalar { get }
+  var __m23: Scalar { get }
+  var __m24: Scalar { get }
+  var __m31: Scalar { get }
+  var __m32: Scalar { get }
+  var __m33: Scalar { get }
+  var __m34: Scalar { get }
+  var __m41: Scalar { get }
+  var __m42: Scalar { get }
+  var __m43: Scalar { get }
+  var __m44: Scalar { get }
 }
 
 protocol InstantiableVector2Type: Vector2Type {
-  init(_x: Scalar, _y: Scalar)
+  init(__x: Scalar, __y: Scalar)
 }
 
 protocol InstantiableVector3Type: Vector3Type {
-  init(_x: Scalar, _y: Scalar, _z: Scalar)
+  init(__x: Scalar, __y: Scalar, __z: Scalar)
 }
 
 protocol InstantiableVector4Type: Vector4Type {
-  init(_x: Scalar, _y: Scalar, _z: Scalar, _w: Scalar)
+  init(__x: Scalar, __y: Scalar, __z: Scalar, __w: Scalar)
 }
 
 protocol InstantiableQuaternionType: QuaternionType, InstantiableVector4Type {}
 
 protocol InstantiableMatrix3Type: Matrix3Type {
   init(
-    _m11: Scalar, _m12: Scalar, _m13: Scalar,
-    _m21: Scalar, _m22: Scalar, _m23: Scalar,
-    _m31: Scalar, _m32: Scalar, _m33: Scalar
+    __m11: Scalar, __m12: Scalar, __m13: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar
   )
 }
 
 protocol InstantiableMatrix4Type: Matrix4Type {
   init(
-    _m11: Scalar, _m12: Scalar, _m13: Scalar, _m14: Scalar,
-    _m21: Scalar, _m22: Scalar, _m23: Scalar, _m24: Scalar,
-    _m31: Scalar, _m32: Scalar, _m33: Scalar, _m34: Scalar,
-    _m41: Scalar, _m42: Scalar, _m43: Scalar, _m44: Scalar
+    __m11: Scalar, __m12: Scalar, __m13: Scalar, __m14: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar, __m24: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar, __m34: Scalar,
+    __m41: Scalar, __m42: Scalar, __m43: Scalar, __m44: Scalar
   )
 }
 
@@ -121,7 +121,7 @@ protocol InstantiableMatrix4Type: Matrix4Type {
 
 extension Vector2Type {
   var lengthSquared: Scalar {
-    return _x * _x + _y * _y
+    return __x * __x + __y * __y
   }
 
   var length: Scalar {
@@ -129,15 +129,15 @@ extension Vector2Type {
   }
 
   func toArray() -> [Scalar] {
-    return [_x, _y]
+    return [__x, __y]
   }
 
   func dot(v: Vector2Type) -> Scalar {
-    return _x * v._x + _y * v._y
+    return __x * v.__x + __y * v.__y
   }
 
   func cross(v: Vector2Type) -> Scalar {
-    return _x * v._y - _y * v._x
+    return __x * v.__y - __y * v.__x
   }
 
   func angleWith(v: Vector2Type) -> Scalar {
@@ -154,11 +154,11 @@ extension Vector2Type {
   }
 
   func vector2IsEqual(v: Vector2Type) -> Bool {
-    return _x == v._x && _y == v._y
+    return __x == v.__x && __y == v.__y
   }
 
   func vector2IsApproxEqual(v: Vector2Type) -> Bool {
-    return _x ~= v._x && _y ~= v._y
+    return __x ~= v.__x && __y ~= v.__y
   }
 }
 
@@ -178,7 +178,7 @@ extension InstantiableVector2Type {
   func rotatedBy(radians: Scalar) -> Self {
     let cs = cos(radians)
     let sn = sin(radians)
-    return Self(_x: _x * cs - _y * sn, _y: _x * sn + _y * cs)
+    return Self(__x: __x * cs - __y * sn, __y: __x * sn + __y * cs)
   }
 
   func rotatedBy(radians: Scalar, around pivot: Vector2Type) -> Self {
@@ -195,57 +195,57 @@ prefix func +<T: InstantiableVector2Type>(v: T) -> T {
 }
 
 prefix func -<T: InstantiableVector2Type>(v: T) -> T {
-  return T(_x: -v._x, _y: -v._y)
+  return T(__x: -v.__x, __y: -v.__y)
 }
 
 func +<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
 }
 
 func +<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
 }
 
 func +<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
 }
 
 func -<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
 }
 
 func -<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
 }
 
 func -<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
 }
 
 func *<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
 }
 
 func *<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
 }
 
 func *<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
 }
 
 func *<T: InstantiableVector2Type>(lhs: Scalar, rhs: T) -> T {
-  return T(_x: lhs * rhs._x, _y: lhs * rhs._y)
+  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y)
 }
 
 func *<T: InstantiableVector2Type>(lhs: T, rhs: Scalar) -> T {
-  return T(_x: lhs._x * rhs, _y: lhs._y * rhs)
+  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs)
 }
 
 func *<T: InstantiableVector2Type>(lhs: T, rhs: Matrix3Type) -> T {
   return T(
-    _x: lhs._x * rhs._m11 + lhs._y * rhs._m21 + rhs._m31,
-    _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + rhs._m32
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + rhs.__m31,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + rhs.__m32
   )
 }
 
@@ -254,26 +254,26 @@ func *<T: InstantiableVector2Type>(lhs: Matrix3Type, rhs: T) -> T {
 }
 
 func /<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
 }
 
 func /<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
 }
 
 func /<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
 }
 
 func /<T: InstantiableVector2Type>(lhs: T, rhs: Scalar) -> T {
-  return T(_x: lhs._x / rhs, _y: lhs._y / rhs)
+  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs)
 }
 
 //MARK: Vector3
 
 extension Vector3Type {
   var lengthSquared: Scalar {
-    return _x * _x + _y * _y + _z * _z
+    return __x * __x + __y * __y + __z * __z
   }
 
   var length: Scalar {
@@ -281,31 +281,31 @@ extension Vector3Type {
   }
 
   func toArray() -> [Scalar] {
-    return [_x, _y, _z]
+    return [__x, __y, __z]
   }
 
   func dot(v: Vector3Type) -> Scalar {
-    return _x * v._x + _y * v._y + _z * v._z
+    return __x * v.__x + __y * v.__y + __z * v.__z
   }
 
   func xy<T: InstantiableVector2Type>() -> T {
-    return T(_x: _x, _y: _y)
+    return T(__x: __x, __y: __y)
   }
 
   func xz<T: InstantiableVector2Type>() -> T {
-    return T(_x: _x, _y: _z)
+    return T(__x: __x, __y: __z)
   }
 
   func yz<T: InstantiableVector2Type>() -> T {
-    return T(_x: _y, _y: _z)
+    return T(__x: __y, __y: __z)
   }
 
   func vector3IsEqual(v: Vector3Type) -> Bool {
-    return _x == v._x && _y == v._y && _z == v._z
+    return __x == v.__x && __y == v.__y && __z == v.__z
   }
 
   func vector3IsApproxEqual(v: Vector3Type) -> Bool {
-    return _x ~= v._x && _y ~= v._y && _z ~= v._z
+    return __x ~= v.__x && __y ~= v.__y && __z ~= v.__z
   }
 }
 
@@ -316,9 +316,9 @@ extension InstantiableVector3Type {
 
   func cross(v: Vector3Type) -> Self {
     return Self(
-      _x: _y * v._z - _z * v._y,
-      _y: _z * v._x - _x * v._z,
-      _z: _x * v._y - _y * v._x
+      __x: __y * v.__z - __z * v.__y,
+      __y: __z * v.__x - __x * v.__z,
+      __z: __x * v.__y - __y * v.__x
     )
   }
 
@@ -340,66 +340,66 @@ prefix func +<T: InstantiableVector3Type>(v: T) -> T {
 }
 
 prefix func -<T: InstantiableVector3Type>(v: T) -> T {
-  return T(_x: -v._x, _y: -v._y, _z: -v._z)
+  return T(__x: -v.__x, __y: -v.__y, __z: -v.__z)
 }
 
 func +<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y, _z: lhs._z + rhs._z)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
 }
 
 func +<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y, _z: lhs._z + rhs._z)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
 }
 
 func +<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y, _z: lhs._z + rhs._z)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
 }
 
 func -<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y, _z: lhs._z - rhs._z)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
 }
 
 func -<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y, _z: lhs._z - rhs._z)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
 }
 
 func -<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y, _z: lhs._z - rhs._z)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
 }
 
 func *<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y, _z: lhs._z * rhs._z)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
 }
 
 func *<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y, _z: lhs._z * rhs._z)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
 }
 
 func *<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y, _z: lhs._z * rhs._z)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
 }
 
 func *<T: InstantiableVector3Type>(lhs: Scalar, rhs: T) -> T {
-  return T(_x: lhs * rhs._x, _y: lhs * rhs._y, _z: lhs * rhs._z)
+  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y, __z: lhs * rhs.__z)
 }
 
 func *<T: InstantiableVector3Type>(lhs: T, rhs: Scalar) -> T {
-  return T(_x: lhs._x * rhs, _y: lhs._y * rhs, _z: lhs._z * rhs)
+  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs, __z: lhs.__z * rhs)
 }
 
 func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix3Type) -> T {
   return T(
-    _x: lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31,
-    _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32,
-    _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32,
+    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33
   )
 }
 
 func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix4Type) -> T {
   return T(
-    _x: lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31 + rhs._m41,
-    _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32 + rhs._m42,
-    _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33 + rhs._m43
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31 + rhs.__m41,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32 + rhs.__m42,
+    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33 + rhs.__m43
   )
 }
 
@@ -415,7 +415,7 @@ func *<T: InstantiableVector3Type>(v: T, q: QuaternionType) -> T {
   let qv: Vector3 = q.xyz()
   let uv = qv.cross(v)
   let uuv = qv.cross(uv)
-  let sub = uv * 2 * q._w
+  let sub = uv * 2 * q.__w
   return v + sub + (uuv * 2)
 }
 
@@ -424,26 +424,26 @@ func *<T: InstantiableVector3Type>(lhs: QuaternionType, rhs: T) -> T {
 }
 
 func /<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y, _z: lhs._z / rhs._z)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
 }
 
 func /<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y, _z: lhs._z / rhs._z)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
 }
 
 func /<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y, _z: lhs._z / rhs._z)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
 }
 
 func /<T: InstantiableVector3Type>(lhs: T, rhs: Scalar) -> T {
-  return T(_x: lhs._x / rhs, _y: lhs._y / rhs, _z: lhs._z / rhs)
+  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs, __z: lhs.__z / rhs)
 }
 
 //MARK: Vector4
 
 extension Vector4Type {
   var lengthSquared: Scalar {
-    return _x * _x + _y * _y + _z * _z + _w * _w
+    return __x * __x + __y * __y + __z * __z + __w * __w
   }
 
   var length: Scalar {
@@ -451,35 +451,35 @@ extension Vector4Type {
   }
 
   func toArray() -> [Scalar] {
-    return [_x, _y, _z, _w]
+    return [__x, __y, __z, __w]
   }
 
   func dot(v: Vector4Type) -> Scalar {
-    return _x * v._x + _y * v._y + _z * v._z + _w * v._w
+    return __x * v.__x + __y * v.__y + __z * v.__z + __w * v.__w
   }
 
   func xyz<T: InstantiableVector3Type>() -> T {
-    return T(_x: _x, _y: _y, _z: _z)
+    return T(__x: __x, __y: __y, __z: __z)
   }
 
   func xy<T: InstantiableVector2Type>() -> T {
-    return T(_x: _x, _y: _y)
+    return T(__x: __x, __y: __y)
   }
 
   func xz<T: InstantiableVector2Type>() -> T {
-    return T(_x: _x, _y: _z)
+    return T(__x: __x, __y: __z)
   }
 
   func yz<T: InstantiableVector2Type>() -> T {
-    return T(_x: _y, _y: _z)
+    return T(__x: __y, __y: __z)
   }
 
   func vector4IsEqual(v: Vector4Type) -> Bool {
-    return _x == v._x && _y == v._y && _z == v._z && _w == v._w
+    return __x == v.__x && __y == v.__y && __z == v.__z && __w == v.__w
   }
 
   func vector4IsApproxEqual(v: Vector4Type) -> Bool {
-    return _x ~= v._x && _y ~= v._y && _z ~= v._z && _w ~= v._w
+    return __x ~= v.__x && __y ~= v.__y && __z ~= v.__z && __w ~= v.__w
   }
 }
 
@@ -506,59 +506,59 @@ prefix func +<T: InstantiableVector4Type>(v: T) -> T {
 }
 
 prefix func -<T: InstantiableVector4Type>(v: T) -> T {
-  return T(_x: -v._x, _y: -v._y, _z: -v._z, _w: -v._w)
+  return T(__x: -v.__x, __y: -v.__y, __z: -v.__z, __w: -v.__w)
 }
 
 func +<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y, _z: lhs._z + rhs._z, _w: lhs._w + rhs._w)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
 }
 
 func +<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y, _z: lhs._z + rhs._z, _w: lhs._w + rhs._w)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
 }
 
 func +<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(_x: lhs._x + rhs._x, _y: lhs._y + rhs._y, _z: lhs._z + rhs._z, _w: lhs._w + rhs._w)
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
 }
 
 func -<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y, _z: lhs._z - rhs._z, _w: lhs._w - rhs._w)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
 }
 
 func -<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y, _z: lhs._z - rhs._z, _w: lhs._w - rhs._w)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
 }
 
 func -<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(_x: lhs._x - rhs._x, _y: lhs._y - rhs._y, _z: lhs._z - rhs._z, _w: lhs._w - rhs._w)
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
 }
 
 func *<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y, _z: lhs._z * rhs._z, _w: lhs._w * rhs._w)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
 }
 
 func *<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y, _z: lhs._z * rhs._z, _w: lhs._w * rhs._w)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
 }
 
 func *<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(_x: lhs._x * rhs._x, _y: lhs._y * rhs._y, _z: lhs._z * rhs._z, _w: lhs._w * rhs._w)
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
 }
 
 func *<T: InstantiableVector4Type>(lhs: Scalar, rhs: T) -> T {
-  return T(_x: lhs * rhs._x, _y: lhs * rhs._y, _z: lhs * rhs._z, _w: lhs * rhs._w)
+  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y, __z: lhs * rhs.__z, __w: lhs * rhs.__w)
 }
 
 func *<T: InstantiableVector4Type>(lhs: T, rhs: Scalar) -> T {
-  return T(_x: lhs._x * rhs, _y: lhs._y * rhs, _z: lhs._z * rhs, _w: lhs._w * rhs)
+  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs, __z: lhs.__z * rhs, __w: lhs.__w * rhs)
 }
 
 func *<T: InstantiableVector4Type>(lhs: T, rhs: Matrix4Type) -> T {
   return T(
-    _x: lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31 + lhs._w * rhs._m41,
-    _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32 + lhs._w * rhs._m42,
-    _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33 + lhs._w * rhs._m43,
-    _w: lhs._x * rhs._m14 + lhs._y * rhs._m24 + lhs._z * rhs._m34 + lhs._w * rhs._m44
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31 + lhs.__w * rhs.__m41,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32 + lhs.__w * rhs.__m42,
+    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33 + lhs.__w * rhs.__m43,
+    __w: lhs.__x * rhs.__m14 + lhs.__y * rhs.__m24 + lhs.__z * rhs.__m34 + lhs.__w * rhs.__m44
   )
 }
 
@@ -567,34 +567,34 @@ func *<T: InstantiableVector4Type>(lhs: Matrix4Type, rhs: T) -> T {
 }
 
 func /<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y, _z: lhs._z / rhs._z, _w: lhs._w / rhs._w)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
 }
 
 func /<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y, _z: lhs._z / rhs._z, _w: lhs._w / rhs._w)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
 }
 
 func /<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(_x: lhs._x / rhs._x, _y: lhs._y / rhs._y, _z: lhs._z / rhs._z, _w: lhs._w / rhs._w)
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
 }
 
 func /<T: InstantiableVector4Type>(lhs: T, rhs: Scalar) -> T {
-  return T(_x: lhs._x / rhs, _y: lhs._y / rhs, _z: lhs._z / rhs, _w: lhs._w / rhs)
+  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs, __z: lhs.__z / rhs, __w: lhs.__w / rhs)
 }
 
 //MARK: Quaternion
 
 extension QuaternionType {
   var pitch: Scalar {
-    return atan2(2 * (_y * _z + _w * _x), _w * _w - _x * _x - _y * _y + _z * _z)
+    return atan2(2 * (__y * __z + __w * __x), __w * __w - __x * __x - __y * __y + __z * __z)
   }
 
   var yaw: Scalar {
-    return asin(-2 * (_x * _z - _w * _y))
+    return asin(-2 * (__x * __z - __w * __y))
   }
 
   var roll: Scalar {
-    return atan2(2 * (_x * _y + _w * _z), _w * _w + _x * _x - _y * _y - _z * _z)
+    return atan2(2 * (__x * __y + __w * __z), __w * __w + __x * __x - __y * __y - __z * __z)
   }
 
   func toPitchYawRoll() -> (pitch: Scalar, yaw: Scalar, roll: Scalar) {
@@ -605,9 +605,9 @@ extension QuaternionType {
     let xyzVector: Vector3 = xyz()
     let scale = xyzVector.length
     if scale ~= 0 || scale ~= .TwoPi {
-      return T(_x: 0, _y: 0, _z: 1, _w: 0)
+      return T(__x: 0, __y: 0, __z: 1, __w: 0)
     } else {
-      return T(_x: _x / scale, _y: _y / scale, _z: _z / scale, _w: acos(_w) * 2)
+      return T(__x: __x / scale, __y: __y / scale, __z: __z / scale, __w: acos(__w) * 2)
     }
   }
 
@@ -636,28 +636,28 @@ extension InstantiableQuaternionType {
 
 func *<T: InstantiableQuaternionType>(lhs: T, rhs: T) -> T {
   return T(
-    _x: lhs._w * rhs._x + lhs._x * rhs._w + lhs._y * rhs._z - lhs._z * rhs._y,
-    _y: lhs._w * rhs._y + lhs._y * rhs._w + lhs._z * rhs._x - lhs._x * rhs._z,
-    _z: lhs._w * rhs._z + lhs._z * rhs._w + lhs._x * rhs._y - lhs._y * rhs._x,
-    _w: lhs._w * rhs._w - lhs._x * rhs._x - lhs._y * rhs._y - lhs._z * rhs._z
+    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
+    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
+    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
+    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
   )
 }
 
 func *<T: InstantiableQuaternionType>(lhs: T, rhs: QuaternionType) -> T {
   return T(
-    _x: lhs._w * rhs._x + lhs._x * rhs._w + lhs._y * rhs._z - lhs._z * rhs._y,
-    _y: lhs._w * rhs._y + lhs._y * rhs._w + lhs._z * rhs._x - lhs._x * rhs._z,
-    _z: lhs._w * rhs._z + lhs._z * rhs._w + lhs._x * rhs._y - lhs._y * rhs._x,
-    _w: lhs._w * rhs._w - lhs._x * rhs._x - lhs._y * rhs._y - lhs._z * rhs._z
+    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
+    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
+    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
+    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
   )
 }
 
 func *<T: InstantiableQuaternionType>(lhs: QuaternionType, rhs: T) -> T {
   return T(
-    _x: lhs._w * rhs._x + lhs._x * rhs._w + lhs._y * rhs._z - lhs._z * rhs._y,
-    _y: lhs._w * rhs._y + lhs._y * rhs._w + lhs._z * rhs._x - lhs._x * rhs._z,
-    _z: lhs._w * rhs._z + lhs._z * rhs._w + lhs._x * rhs._y - lhs._y * rhs._x,
-    _w: lhs._w * rhs._w - lhs._x * rhs._x - lhs._y * rhs._y - lhs._z * rhs._z
+    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
+    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
+    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
+    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
   )
 }
 
@@ -665,49 +665,49 @@ func *<T: InstantiableQuaternionType>(lhs: QuaternionType, rhs: T) -> T {
 
 extension Matrix3Type {
   func toArray() -> [Scalar] {
-    return [_m11, _m12, _m13, _m21, _m22, _m23, _m31, _m32, _m33]
+    return [__m11, __m12, __m13, __m21, __m22, __m23, __m31, __m32, __m33]
   }
 
   var determinant: Scalar {
-    return (_m11 * _m22 * _m33 + _m12 * _m23 * _m31 + _m13 * _m21 * _m32)
-      - (_m13 * _m22 * _m31 + _m11 * _m23 * _m32 + _m12 * _m21 * _m33)
+    return (__m11 * __m22 * __m33 + __m12 * __m23 * __m31 + __m13 * __m21 * __m32)
+      - (__m13 * __m22 * __m31 + __m11 * __m23 * __m32 + __m12 * __m21 * __m33)
   }
 
   func matrix3IsEqual(m: Matrix3Type) -> Bool {
     return
-      _m11 == m._m11 && _m12 == m._m12 && _m13 == m._m13 &&
-      _m21 == m._m21 && _m22 == m._m22 && _m23 == m._m23 &&
-      _m31 == m._m31 && _m32 == m._m32 && _m33 == m._m33
+      __m11 == m.__m11 && __m12 == m.__m12 && __m13 == m.__m13 &&
+      __m21 == m.__m21 && __m22 == m.__m22 && __m23 == m.__m23 &&
+      __m31 == m.__m31 && __m32 == m.__m32 && __m33 == m.__m33
   }
 
   func matrix3IsApproxEqual(m: Matrix3Type) -> Bool {
     return
-      _m11 ~= m._m11 && _m12 ~= m._m12 && _m13 ~= m._m13 &&
-      _m21 ~= m._m21 && _m22 ~= m._m22 && _m23 ~= m._m23 &&
-      _m31 ~= m._m31 && _m32 ~= m._m32 && _m33 ~= m._m33
+      __m11 ~= m.__m11 && __m12 ~= m.__m12 && __m13 ~= m.__m13 &&
+      __m21 ~= m.__m21 && __m22 ~= m.__m22 && __m23 ~= m.__m23 &&
+      __m31 ~= m.__m31 && __m32 ~= m.__m32 && __m33 ~= m.__m33
   }
 }
 
 extension InstantiableMatrix3Type {
   var adjugate: Self {
     return Self(
-      _m11: _m22 * _m33 - _m23 * _m32,
-      _m12: _m13 * _m32 - _m12 * _m33,
-      _m13: _m12 * _m23 - _m13 * _m22,
-      _m21: _m23 * _m31 - _m21 * _m33,
-      _m22: _m11 * _m33 - _m13 * _m31,
-      _m23: _m13 * _m21 - _m11 * _m23,
-      _m31: _m21 * _m32 - _m22 * _m31,
-      _m32: _m12 * _m31 - _m11 * _m32,
-      _m33: _m11 * _m22 - _m12 * _m21
+      __m11: __m22 * __m33 - __m23 * __m32,
+      __m12: __m13 * __m32 - __m12 * __m33,
+      __m13: __m12 * __m23 - __m13 * __m22,
+      __m21: __m23 * __m31 - __m21 * __m33,
+      __m22: __m11 * __m33 - __m13 * __m31,
+      __m23: __m13 * __m21 - __m11 * __m23,
+      __m31: __m21 * __m32 - __m22 * __m31,
+      __m32: __m12 * __m31 - __m11 * __m32,
+      __m33: __m11 * __m22 - __m12 * __m21
     )
   }
 
   var transpose: Self {
     return Self(
-      _m11: _m11, _m12: _m21, _m13: _m31,
-      _m21: _m12, _m22: _m22, _m23: _m32,
-      _m31: _m13, _m32: _m23, _m33: _m33
+      __m11: __m11, __m12: __m21, __m13: __m31,
+      __m21: __m12, __m22: __m22, __m23: __m32,
+      __m31: __m13, __m32: __m23, __m33: __m33
     )
   }
 
@@ -717,15 +717,15 @@ extension InstantiableMatrix3Type {
 
   func interpolatedWith(m: Matrix3Type, t: Scalar) -> Self {
     return Self(
-      _m11: _m11 + (m._m11 - _m11) * t,
-      _m12: _m12 + (m._m12 - _m12) * t,
-      _m13: _m13 + (m._m13 - _m13) * t,
-      _m21: _m21 + (m._m21 - _m21) * t,
-      _m22: _m22 + (m._m22 - _m22) * t,
-      _m23: _m23 + (m._m23 - _m23) * t,
-      _m31: _m31 + (m._m31 - _m31) * t,
-      _m32: _m32 + (m._m32 - _m32) * t,
-      _m33: _m33 + (m._m33 - _m33) * t
+      __m11: __m11 + (m.__m11 - __m11) * t,
+      __m12: __m12 + (m.__m12 - __m12) * t,
+      __m13: __m13 + (m.__m13 - __m13) * t,
+      __m21: __m21 + (m.__m21 - __m21) * t,
+      __m22: __m22 + (m.__m22 - __m22) * t,
+      __m23: __m23 + (m.__m23 - __m23) * t,
+      __m31: __m31 + (m.__m31 - __m31) * t,
+      __m32: __m32 + (m.__m32 - __m32) * t,
+      __m33: __m33 + (m.__m33 - __m33) * t
     )
   }
 }
@@ -740,59 +740,59 @@ prefix func -<T: InstantiableMatrix3Type>(m: T) -> T {
 
 func *<T: InstantiableMatrix3Type>(lhs: T, rhs: T) -> T {
   return T(
-    _m11: lhs._m11 * rhs._m11 + lhs._m21 * rhs._m12 + lhs._m31 * rhs._m13,
-    _m12: lhs._m12 * rhs._m11 + lhs._m22 * rhs._m12 + lhs._m32 * rhs._m13,
-    _m13: lhs._m13 * rhs._m11 + lhs._m23 * rhs._m12 + lhs._m33 * rhs._m13,
-    _m21: lhs._m11 * rhs._m21 + lhs._m21 * rhs._m22 + lhs._m31 * rhs._m23,
-    _m22: lhs._m12 * rhs._m21 + lhs._m22 * rhs._m22 + lhs._m32 * rhs._m23,
-    _m23: lhs._m13 * rhs._m21 + lhs._m23 * rhs._m22 + lhs._m33 * rhs._m23,
-    _m31: lhs._m11 * rhs._m31 + lhs._m21 * rhs._m32 + lhs._m31 * rhs._m33,
-    _m32: lhs._m12 * rhs._m31 + lhs._m22 * rhs._m32 + lhs._m32 * rhs._m33,
-    _m33: lhs._m13 * rhs._m31 + lhs._m23 * rhs._m32 + lhs._m33 * rhs._m33
+    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
+    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
+    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
+    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
+    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
+    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
+    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
+    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
+    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
   )
 }
 
 func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Matrix3Type) -> T {
   return T(
-    _m11: lhs._m11 * rhs._m11 + lhs._m21 * rhs._m12 + lhs._m31 * rhs._m13,
-    _m12: lhs._m12 * rhs._m11 + lhs._m22 * rhs._m12 + lhs._m32 * rhs._m13,
-    _m13: lhs._m13 * rhs._m11 + lhs._m23 * rhs._m12 + lhs._m33 * rhs._m13,
-    _m21: lhs._m11 * rhs._m21 + lhs._m21 * rhs._m22 + lhs._m31 * rhs._m23,
-    _m22: lhs._m12 * rhs._m21 + lhs._m22 * rhs._m22 + lhs._m32 * rhs._m23,
-    _m23: lhs._m13 * rhs._m21 + lhs._m23 * rhs._m22 + lhs._m33 * rhs._m23,
-    _m31: lhs._m11 * rhs._m31 + lhs._m21 * rhs._m32 + lhs._m31 * rhs._m33,
-    _m32: lhs._m12 * rhs._m31 + lhs._m22 * rhs._m32 + lhs._m32 * rhs._m33,
-    _m33: lhs._m13 * rhs._m31 + lhs._m23 * rhs._m32 + lhs._m33 * rhs._m33
+    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
+    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
+    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
+    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
+    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
+    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
+    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
+    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
+    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
   )
 }
 
 func *<T: InstantiableMatrix3Type>(lhs: Matrix3Type, rhs: T) -> T {
   return T(
-    _m11: lhs._m11 * rhs._m11 + lhs._m21 * rhs._m12 + lhs._m31 * rhs._m13,
-    _m12: lhs._m12 * rhs._m11 + lhs._m22 * rhs._m12 + lhs._m32 * rhs._m13,
-    _m13: lhs._m13 * rhs._m11 + lhs._m23 * rhs._m12 + lhs._m33 * rhs._m13,
-    _m21: lhs._m11 * rhs._m21 + lhs._m21 * rhs._m22 + lhs._m31 * rhs._m23,
-    _m22: lhs._m12 * rhs._m21 + lhs._m22 * rhs._m22 + lhs._m32 * rhs._m23,
-    _m23: lhs._m13 * rhs._m21 + lhs._m23 * rhs._m22 + lhs._m33 * rhs._m23,
-    _m31: lhs._m11 * rhs._m31 + lhs._m21 * rhs._m32 + lhs._m31 * rhs._m33,
-    _m32: lhs._m12 * rhs._m31 + lhs._m22 * rhs._m32 + lhs._m32 * rhs._m33,
-    _m33: lhs._m13 * rhs._m31 + lhs._m23 * rhs._m32 + lhs._m33 * rhs._m33
+    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
+    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
+    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
+    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
+    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
+    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
+    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
+    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
+    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
   )
 }
 
 func *<T: InstantiableMatrix3Type>(lhs: Scalar, rhs: T) -> T {
   return T(
-    _m11: lhs * rhs._m11, _m12: lhs * rhs._m12, _m13: lhs * rhs._m13,
-    _m21: lhs * rhs._m21, _m22: lhs * rhs._m22, _m23: lhs * rhs._m23,
-    _m31: lhs * rhs._m31, _m32: lhs * rhs._m32, _m33: lhs * rhs._m33
+    __m11: lhs * rhs.__m11, __m12: lhs * rhs.__m12, __m13: lhs * rhs.__m13,
+    __m21: lhs * rhs.__m21, __m22: lhs * rhs.__m22, __m23: lhs * rhs.__m23,
+    __m31: lhs * rhs.__m31, __m32: lhs * rhs.__m32, __m33: lhs * rhs.__m33
   )
 }
 
 func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Scalar) -> T {
   return T(
-    _m11: lhs._m11 * rhs, _m12: lhs._m12 * rhs, _m13: lhs._m13 * rhs,
-    _m21: lhs._m21 * rhs, _m22: lhs._m22 * rhs, _m23: lhs._m23 * rhs,
-    _m31: lhs._m31 * rhs, _m32: lhs._m32 * rhs, _m33: lhs._m33 * rhs
+    __m11: lhs.__m11 * rhs, __m12: lhs.__m12 * rhs, __m13: lhs.__m13 * rhs,
+    __m21: lhs.__m21 * rhs, __m22: lhs.__m22 * rhs, __m23: lhs.__m23 * rhs,
+    __m31: lhs.__m31 * rhs, __m32: lhs.__m32 * rhs, __m33: lhs.__m33 * rhs
   )
 }
 
@@ -801,15 +801,15 @@ func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Scalar) -> T {
 extension Matrix4Type {
   func toArray() -> [Scalar] {
     return [
-      _m11, _m12, _m13, _m14,
-      _m21, _m22, _m23, _m24,
-      _m31, _m32, _m33, _m34,
-      _m41, _m42, _m43, _m44
+      __m11, __m12, __m13, __m14,
+      __m21, __m22, __m23, __m24,
+      __m31, __m32, __m33, __m34,
+      __m41, __m42, __m43, __m44
     ]
   }
 
   private func determinantForAdjugate(m: Matrix4Type) -> Scalar {
-    return _m11 * m._m11 + _m12 * m._m21 + _m13 * m._m31 + _m14 * m._m41
+    return __m11 * m.__m11 + __m12 * m.__m21 + __m13 * m.__m31 + __m14 * m.__m41
   }
 
   var determinant: Scalar {
@@ -819,96 +819,96 @@ extension Matrix4Type {
 
   func matrix4IsEqual(m: Matrix4Type) -> Bool {
     return
-      _m11 == m._m11 && _m12 == m._m12 && _m13 == m._m13 && _m14 == m._m14 &&
-      _m21 == m._m21 && _m22 == m._m22 && _m23 == m._m23 && _m24 == m._m24 &&
-      _m31 == m._m31 && _m32 == m._m32 && _m33 == m._m33 && _m34 == m._m34 &&
-      _m41 == m._m41 && _m42 == m._m42 && _m43 == m._m43 && _m44 == m._m44
+      __m11 == m.__m11 && __m12 == m.__m12 && __m13 == m.__m13 && __m14 == m.__m14 &&
+      __m21 == m.__m21 && __m22 == m.__m22 && __m23 == m.__m23 && __m24 == m.__m24 &&
+      __m31 == m.__m31 && __m32 == m.__m32 && __m33 == m.__m33 && __m34 == m.__m34 &&
+      __m41 == m.__m41 && __m42 == m.__m42 && __m43 == m.__m43 && __m44 == m.__m44
   }
 
   func matrix4IsApproxEqual(m: Matrix4Type) -> Bool {
     return
-      _m11 ~= m._m11 && _m12 ~= m._m12 && _m13 ~= m._m13 && _m14 ~= m._m14 &&
-      _m21 ~= m._m21 && _m22 ~= m._m22 && _m23 ~= m._m23 && _m24 ~= m._m24 &&
-      _m31 ~= m._m31 && _m32 ~= m._m32 && _m33 ~= m._m33 && _m34 ~= m._m34 &&
-      _m41 ~= m._m41 && _m42 ~= m._m42 && _m43 ~= m._m43 && _m44 ~= m._m44
+      __m11 ~= m.__m11 && __m12 ~= m.__m12 && __m13 ~= m.__m13 && __m14 ~= m.__m14 &&
+      __m21 ~= m.__m21 && __m22 ~= m.__m22 && __m23 ~= m.__m23 && __m24 ~= m.__m24 &&
+      __m31 ~= m.__m31 && __m32 ~= m.__m32 && __m33 ~= m.__m33 && __m34 ~= m.__m34 &&
+      __m41 ~= m.__m41 && __m42 ~= m.__m42 && __m43 ~= m.__m43 && __m44 ~= m.__m44
   }
 }
 
 extension InstantiableMatrix4Type {
   var adjugate: Self {
     return Self(
-      _m11: (_m22 * _m33 * _m44 - _m22 * _m34 * _m43) +
-      (-_m32 * _m23 * _m44 + _m32 * _m24 * _m43) +
-      (_m42 * _m23 * _m34 - _m42 * _m24 * _m33),
+      __m11: (__m22 * __m33 * __m44 - __m22 * __m34 * __m43) +
+      (-__m32 * __m23 * __m44 + __m32 * __m24 * __m43) +
+      (__m42 * __m23 * __m34 - __m42 * __m24 * __m33),
 
-      _m12: (-_m12 * _m33 * _m44 + _m12 * _m34 * _m43) +
-      (_m32 * _m13 * _m44 - _m32 * _m14 * _m43) +
-      (-_m42 * _m13 * _m34 + _m42 * _m14 * _m33),
+      __m12: (-__m12 * __m33 * __m44 + __m12 * __m34 * __m43) +
+      (__m32 * __m13 * __m44 - __m32 * __m14 * __m43) +
+      (-__m42 * __m13 * __m34 + __m42 * __m14 * __m33),
 
-      _m13: (_m12 * _m23 * _m44 - _m12 * _m24 * _m43) +
-      (-_m22 * _m13 * _m44 + _m22 * _m14 * _m43) +
-      (_m42 * _m13 * _m24 - _m42 * _m14 * _m23),
+      __m13: (__m12 * __m23 * __m44 - __m12 * __m24 * __m43) +
+      (-__m22 * __m13 * __m44 + __m22 * __m14 * __m43) +
+      (__m42 * __m13 * __m24 - __m42 * __m14 * __m23),
 
-      _m14: (-_m12 * _m23 * _m34 + _m12 * _m24 * _m33) +
-      (_m22 * _m13 * _m34 - _m22 * _m14 * _m33) +
-      (-_m32 * _m13 * _m24 + _m32 * _m14 * _m23),
+      __m14: (-__m12 * __m23 * __m34 + __m12 * __m24 * __m33) +
+      (__m22 * __m13 * __m34 - __m22 * __m14 * __m33) +
+      (-__m32 * __m13 * __m24 + __m32 * __m14 * __m23),
 
-      _m21: (-_m21 * _m33 * _m44 + _m21 * _m34 * _m43) +
-      (_m31 * _m23 * _m44 - _m31 * _m24 * _m43) +
-      (-_m41 * _m23 * _m34 + _m41 * _m24 * _m33),
+      __m21: (-__m21 * __m33 * __m44 + __m21 * __m34 * __m43) +
+      (__m31 * __m23 * __m44 - __m31 * __m24 * __m43) +
+      (-__m41 * __m23 * __m34 + __m41 * __m24 * __m33),
 
-      _m22: (_m11 * _m33 * _m44 - _m11 * _m34 * _m43) +
-      (-_m31 * _m13 * _m44 + _m31 * _m14 * _m43) +
-      (_m41 * _m13 * _m34 - _m41 * _m14 * _m33),
+      __m22: (__m11 * __m33 * __m44 - __m11 * __m34 * __m43) +
+      (-__m31 * __m13 * __m44 + __m31 * __m14 * __m43) +
+      (__m41 * __m13 * __m34 - __m41 * __m14 * __m33),
 
-      _m23: (-_m11 * _m23 * _m44 + _m11 * _m24 * _m43) +
-      (_m21 * _m13 * _m44 - _m21 * _m14 * _m43) +
-      (-_m41 * _m13 * _m24 + _m41 * _m14 * _m23),
+      __m23: (-__m11 * __m23 * __m44 + __m11 * __m24 * __m43) +
+      (__m21 * __m13 * __m44 - __m21 * __m14 * __m43) +
+      (-__m41 * __m13 * __m24 + __m41 * __m14 * __m23),
 
-      _m24: (_m11 * _m23 * _m34 - _m11 * _m24 * _m33) +
-      (-_m21 * _m13 * _m34 + _m21 * _m14 * _m33) +
-      (_m31 * _m13 * _m24 - _m31 * _m14 * _m23),
+      __m24: (__m11 * __m23 * __m34 - __m11 * __m24 * __m33) +
+      (-__m21 * __m13 * __m34 + __m21 * __m14 * __m33) +
+      (__m31 * __m13 * __m24 - __m31 * __m14 * __m23),
 
-      _m31: (_m21 * _m32 * _m44 - _m21 * _m34 * _m42) +
-      (-_m31 * _m22 * _m44 + _m31 * _m24 * _m42) +
-      (_m41 * _m22 * _m34 - _m41 * _m24 * _m32),
+      __m31: (__m21 * __m32 * __m44 - __m21 * __m34 * __m42) +
+      (-__m31 * __m22 * __m44 + __m31 * __m24 * __m42) +
+      (__m41 * __m22 * __m34 - __m41 * __m24 * __m32),
 
-      _m32: (-_m11 * _m32 * _m44 + _m11 * _m34 * _m42) +
-      (_m31 * _m12 * _m44 - _m31 * _m14 * _m42) +
-      (-_m41 * _m12 * _m34 + _m41 * _m14 * _m32),
+      __m32: (-__m11 * __m32 * __m44 + __m11 * __m34 * __m42) +
+      (__m31 * __m12 * __m44 - __m31 * __m14 * __m42) +
+      (-__m41 * __m12 * __m34 + __m41 * __m14 * __m32),
 
-      _m33: (_m11 * _m22 * _m44 - _m11 * _m24 * _m42) +
-      (-_m21 * _m12 * _m44 + _m21 * _m14 * _m42) +
-      (_m41 * _m12 * _m24 - _m41 * _m14 * _m22),
+      __m33: (__m11 * __m22 * __m44 - __m11 * __m24 * __m42) +
+      (-__m21 * __m12 * __m44 + __m21 * __m14 * __m42) +
+      (__m41 * __m12 * __m24 - __m41 * __m14 * __m22),
 
-      _m34: (-_m11 * _m22 * _m34 + _m11 * _m24 * _m32) +
-      (_m21 * _m12 * _m34 - _m21 * _m14 * _m32) +
-      (-_m31 * _m12 * _m24 + _m31 * _m14 * _m22),
+      __m34: (-__m11 * __m22 * __m34 + __m11 * __m24 * __m32) +
+      (__m21 * __m12 * __m34 - __m21 * __m14 * __m32) +
+      (-__m31 * __m12 * __m24 + __m31 * __m14 * __m22),
 
-      _m41: (-_m21 * _m32 * _m43 + _m21 * _m33 * _m42) +
-      (_m31 * _m22 * _m43 - _m31 * _m23 * _m42) +
-      (-_m41 * _m22 * _m33 + _m41 * _m23 * _m32),
+      __m41: (-__m21 * __m32 * __m43 + __m21 * __m33 * __m42) +
+      (__m31 * __m22 * __m43 - __m31 * __m23 * __m42) +
+      (-__m41 * __m22 * __m33 + __m41 * __m23 * __m32),
 
-      _m42: (_m11 * _m32 * _m43 - _m11 * _m33 * _m42) +
-      (-_m31 * _m12 * _m43 + _m31 * _m13 * _m42) +
-      (_m41 * _m12 * _m33 - _m41 * _m13 * _m32),
+      __m42: (__m11 * __m32 * __m43 - __m11 * __m33 * __m42) +
+      (-__m31 * __m12 * __m43 + __m31 * __m13 * __m42) +
+      (__m41 * __m12 * __m33 - __m41 * __m13 * __m32),
 
-      _m43: (-_m11 * _m22 * _m43 + _m11 * _m23 * _m42) +
-      (_m21 * _m12 * _m43 - _m21 * _m13 * _m42) +
-      (-_m41 * _m12 * _m23 + _m41 * _m13 * _m22),
+      __m43: (-__m11 * __m22 * __m43 + __m11 * __m23 * __m42) +
+      (__m21 * __m12 * __m43 - __m21 * __m13 * __m42) +
+      (-__m41 * __m12 * __m23 + __m41 * __m13 * __m22),
 
-      _m44: (_m11 * _m22 * _m33 - _m11 * _m23 * _m32) +
-      (-_m21 * _m12 * _m33 + _m21 * _m13 * _m32) +
-      (_m31 * _m12 * _m23 - _m31 * _m13 * _m22)
+      __m44: (__m11 * __m22 * __m33 - __m11 * __m23 * __m32) +
+      (-__m21 * __m12 * __m33 + __m21 * __m13 * __m32) +
+      (__m31 * __m12 * __m23 - __m31 * __m13 * __m22)
     )
   }
 
   var transpose: Self {
     return Self(
-      _m11: _m11, _m12: _m21, _m13: _m31, _m14: _m41,
-      _m21: _m12, _m22: _m22, _m23: _m32, _m24: _m42,
-      _m31: _m13, _m32: _m23, _m33: _m33, _m34: _m43,
-      _m41: _m14, _m42: _m24, _m43: _m34, _m44: _m44
+      __m11: __m11, __m12: __m21, __m13: __m31, __m14: __m41,
+      __m21: __m12, __m22: __m22, __m23: __m32, __m24: __m42,
+      __m31: __m13, __m32: __m23, __m33: __m33, __m34: __m43,
+      __m41: __m14, __m42: __m24, __m43: __m34, __m44: __m44
     )
   }
 
@@ -929,175 +929,175 @@ prefix func -<T: InstantiableMatrix4Type>(m: T) -> T {
 
 func *<T: InstantiableMatrix4Type>(lhs: T, rhs: T) -> T {
   return T(
-    _m11: (lhs._m11 * rhs._m11 + lhs._m21 * rhs._m12) +
-    (lhs._m31 * rhs._m13 + lhs._m41 * rhs._m14),
+    __m11: (lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12) +
+    (lhs.__m31 * rhs.__m13 + lhs.__m41 * rhs.__m14),
 
-    _m12: (lhs._m12 * rhs._m11 + lhs._m22 * rhs._m12) +
-    (lhs._m32 * rhs._m13 + lhs._m42 * rhs._m14),
+    __m12: (lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12) +
+    (lhs.__m32 * rhs.__m13 + lhs.__m42 * rhs.__m14),
 
-    _m13: (lhs._m13 * rhs._m11 + lhs._m23 * rhs._m12) +
-    (lhs._m33 * rhs._m13 + lhs._m43 * rhs._m14),
+    __m13: (lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12) +
+    (lhs.__m33 * rhs.__m13 + lhs.__m43 * rhs.__m14),
 
-    _m14: (lhs._m14 * rhs._m11 + lhs._m24 * rhs._m12) +
-    (lhs._m34 * rhs._m13 + lhs._m44 * rhs._m14),
+    __m14: (lhs.__m14 * rhs.__m11 + lhs.__m24 * rhs.__m12) +
+    (lhs.__m34 * rhs.__m13 + lhs.__m44 * rhs.__m14),
 
-    _m21: (lhs._m11 * rhs._m21 + lhs._m21 * rhs._m22) +
-    (lhs._m31 * rhs._m23 + lhs._m41 * rhs._m24),
+    __m21: (lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22) +
+    (lhs.__m31 * rhs.__m23 + lhs.__m41 * rhs.__m24),
 
-    _m22: (lhs._m12 * rhs._m21 + lhs._m22 * rhs._m22) +
-    (lhs._m32 * rhs._m23 + lhs._m42 * rhs._m24),
+    __m22: (lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22) +
+    (lhs.__m32 * rhs.__m23 + lhs.__m42 * rhs.__m24),
 
-    _m23: (lhs._m13 * rhs._m21 + lhs._m23 * rhs._m22) +
-    (lhs._m33 * rhs._m23 + lhs._m43 * rhs._m24),
+    __m23: (lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22) +
+    (lhs.__m33 * rhs.__m23 + lhs.__m43 * rhs.__m24),
 
-    _m24: (lhs._m14 * rhs._m21 + lhs._m24 * rhs._m22) +
-    (lhs._m34 * rhs._m23 + lhs._m44 * rhs._m24),
+    __m24: (lhs.__m14 * rhs.__m21 + lhs.__m24 * rhs.__m22) +
+    (lhs.__m34 * rhs.__m23 + lhs.__m44 * rhs.__m24),
 
-    _m31: (lhs._m11 * rhs._m31 + lhs._m21 * rhs._m32) +
-    (lhs._m31 * rhs._m33 + lhs._m41 * rhs._m34),
+    __m31: (lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32) +
+    (lhs.__m31 * rhs.__m33 + lhs.__m41 * rhs.__m34),
 
-    _m32: (lhs._m12 * rhs._m31 + lhs._m22 * rhs._m32) +
-    (lhs._m32 * rhs._m33 + lhs._m42 * rhs._m34),
+    __m32: (lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32) +
+    (lhs.__m32 * rhs.__m33 + lhs.__m42 * rhs.__m34),
 
-    _m33: (lhs._m13 * rhs._m31 + lhs._m23 * rhs._m32) +
-    (lhs._m33 * rhs._m33 + lhs._m43 * rhs._m34),
+    __m33: (lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32) +
+    (lhs.__m33 * rhs.__m33 + lhs.__m43 * rhs.__m34),
 
-    _m34: (lhs._m14 * rhs._m31 + lhs._m24 * rhs._m32) +
-    (lhs._m34 * rhs._m33 + lhs._m44 * rhs._m34),
+    __m34: (lhs.__m14 * rhs.__m31 + lhs.__m24 * rhs.__m32) +
+    (lhs.__m34 * rhs.__m33 + lhs.__m44 * rhs.__m34),
 
-    _m41: (lhs._m11 * rhs._m41 + lhs._m21 * rhs._m42) +
-    (lhs._m31 * rhs._m43 + lhs._m41 * rhs._m44),
+    __m41: (lhs.__m11 * rhs.__m41 + lhs.__m21 * rhs.__m42) +
+    (lhs.__m31 * rhs.__m43 + lhs.__m41 * rhs.__m44),
 
-    _m42: (lhs._m12 * rhs._m41 + lhs._m22 * rhs._m42) +
-    (lhs._m32 * rhs._m43 + lhs._m42 * rhs._m44),
+    __m42: (lhs.__m12 * rhs.__m41 + lhs.__m22 * rhs.__m42) +
+    (lhs.__m32 * rhs.__m43 + lhs.__m42 * rhs.__m44),
 
-    _m43: (lhs._m13 * rhs._m41 + lhs._m23 * rhs._m42) +
-    (lhs._m33 * rhs._m43 + lhs._m43 * rhs._m44),
+    __m43: (lhs.__m13 * rhs.__m41 + lhs.__m23 * rhs.__m42) +
+    (lhs.__m33 * rhs.__m43 + lhs.__m43 * rhs.__m44),
 
-    _m44: (lhs._m14 * rhs._m41 + lhs._m24 * rhs._m42) +
-    (lhs._m34 * rhs._m43 + lhs._m44 * rhs._m44)
+    __m44: (lhs.__m14 * rhs.__m41 + lhs.__m24 * rhs.__m42) +
+    (lhs.__m34 * rhs.__m43 + lhs.__m44 * rhs.__m44)
   )
 }
 
 func *<T: InstantiableMatrix4Type>(lhs: T, rhs: Matrix4Type) -> T {
   return T(
-    _m11: (lhs._m11 * rhs._m11 + lhs._m21 * rhs._m12) +
-    (lhs._m31 * rhs._m13 + lhs._m41 * rhs._m14),
+    __m11: (lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12) +
+    (lhs.__m31 * rhs.__m13 + lhs.__m41 * rhs.__m14),
 
-    _m12: (lhs._m12 * rhs._m11 + lhs._m22 * rhs._m12) +
-    (lhs._m32 * rhs._m13 + lhs._m42 * rhs._m14),
+    __m12: (lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12) +
+    (lhs.__m32 * rhs.__m13 + lhs.__m42 * rhs.__m14),
 
-    _m13: (lhs._m13 * rhs._m11 + lhs._m23 * rhs._m12) +
-    (lhs._m33 * rhs._m13 + lhs._m43 * rhs._m14),
+    __m13: (lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12) +
+    (lhs.__m33 * rhs.__m13 + lhs.__m43 * rhs.__m14),
 
-    _m14: (lhs._m14 * rhs._m11 + lhs._m24 * rhs._m12) +
-    (lhs._m34 * rhs._m13 + lhs._m44 * rhs._m14),
+    __m14: (lhs.__m14 * rhs.__m11 + lhs.__m24 * rhs.__m12) +
+    (lhs.__m34 * rhs.__m13 + lhs.__m44 * rhs.__m14),
 
-    _m21: (lhs._m11 * rhs._m21 + lhs._m21 * rhs._m22) +
-    (lhs._m31 * rhs._m23 + lhs._m41 * rhs._m24),
+    __m21: (lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22) +
+    (lhs.__m31 * rhs.__m23 + lhs.__m41 * rhs.__m24),
 
-    _m22: (lhs._m12 * rhs._m21 + lhs._m22 * rhs._m22) +
-    (lhs._m32 * rhs._m23 + lhs._m42 * rhs._m24),
+    __m22: (lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22) +
+    (lhs.__m32 * rhs.__m23 + lhs.__m42 * rhs.__m24),
 
-    _m23: (lhs._m13 * rhs._m21 + lhs._m23 * rhs._m22) +
-    (lhs._m33 * rhs._m23 + lhs._m43 * rhs._m24),
+    __m23: (lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22) +
+    (lhs.__m33 * rhs.__m23 + lhs.__m43 * rhs.__m24),
 
-    _m24: (lhs._m14 * rhs._m21 + lhs._m24 * rhs._m22) +
-    (lhs._m34 * rhs._m23 + lhs._m44 * rhs._m24),
+    __m24: (lhs.__m14 * rhs.__m21 + lhs.__m24 * rhs.__m22) +
+    (lhs.__m34 * rhs.__m23 + lhs.__m44 * rhs.__m24),
 
-    _m31: (lhs._m11 * rhs._m31 + lhs._m21 * rhs._m32) +
-    (lhs._m31 * rhs._m33 + lhs._m41 * rhs._m34),
+    __m31: (lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32) +
+    (lhs.__m31 * rhs.__m33 + lhs.__m41 * rhs.__m34),
 
-    _m32: (lhs._m12 * rhs._m31 + lhs._m22 * rhs._m32) +
-    (lhs._m32 * rhs._m33 + lhs._m42 * rhs._m34),
+    __m32: (lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32) +
+    (lhs.__m32 * rhs.__m33 + lhs.__m42 * rhs.__m34),
 
-    _m33: (lhs._m13 * rhs._m31 + lhs._m23 * rhs._m32) +
-    (lhs._m33 * rhs._m33 + lhs._m43 * rhs._m34),
+    __m33: (lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32) +
+    (lhs.__m33 * rhs.__m33 + lhs.__m43 * rhs.__m34),
 
-    _m34: (lhs._m14 * rhs._m31 + lhs._m24 * rhs._m32) +
-    (lhs._m34 * rhs._m33 + lhs._m44 * rhs._m34),
+    __m34: (lhs.__m14 * rhs.__m31 + lhs.__m24 * rhs.__m32) +
+    (lhs.__m34 * rhs.__m33 + lhs.__m44 * rhs.__m34),
 
-    _m41: (lhs._m11 * rhs._m41 + lhs._m21 * rhs._m42) +
-    (lhs._m31 * rhs._m43 + lhs._m41 * rhs._m44),
+    __m41: (lhs.__m11 * rhs.__m41 + lhs.__m21 * rhs.__m42) +
+    (lhs.__m31 * rhs.__m43 + lhs.__m41 * rhs.__m44),
 
-    _m42: (lhs._m12 * rhs._m41 + lhs._m22 * rhs._m42) +
-    (lhs._m32 * rhs._m43 + lhs._m42 * rhs._m44),
+    __m42: (lhs.__m12 * rhs.__m41 + lhs.__m22 * rhs.__m42) +
+    (lhs.__m32 * rhs.__m43 + lhs.__m42 * rhs.__m44),
 
-    _m43: (lhs._m13 * rhs._m41 + lhs._m23 * rhs._m42) +
-    (lhs._m33 * rhs._m43 + lhs._m43 * rhs._m44),
+    __m43: (lhs.__m13 * rhs.__m41 + lhs.__m23 * rhs.__m42) +
+    (lhs.__m33 * rhs.__m43 + lhs.__m43 * rhs.__m44),
 
-    _m44: (lhs._m14 * rhs._m41 + lhs._m24 * rhs._m42) +
-    (lhs._m34 * rhs._m43 + lhs._m44 * rhs._m44)
+    __m44: (lhs.__m14 * rhs.__m41 + lhs.__m24 * rhs.__m42) +
+    (lhs.__m34 * rhs.__m43 + lhs.__m44 * rhs.__m44)
   )
 }
 
 func *<T: InstantiableMatrix4Type>(lhs: Matrix4Type, rhs: T) -> T {
   return T(
-    _m11: (lhs._m11 * rhs._m11 + lhs._m21 * rhs._m12) +
-    (lhs._m31 * rhs._m13 + lhs._m41 * rhs._m14),
+    __m11: (lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12) +
+    (lhs.__m31 * rhs.__m13 + lhs.__m41 * rhs.__m14),
 
-    _m12: (lhs._m12 * rhs._m11 + lhs._m22 * rhs._m12) +
-    (lhs._m32 * rhs._m13 + lhs._m42 * rhs._m14),
+    __m12: (lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12) +
+    (lhs.__m32 * rhs.__m13 + lhs.__m42 * rhs.__m14),
 
-    _m13: (lhs._m13 * rhs._m11 + lhs._m23 * rhs._m12) +
-    (lhs._m33 * rhs._m13 + lhs._m43 * rhs._m14),
+    __m13: (lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12) +
+    (lhs.__m33 * rhs.__m13 + lhs.__m43 * rhs.__m14),
 
-    _m14: (lhs._m14 * rhs._m11 + lhs._m24 * rhs._m12) +
-    (lhs._m34 * rhs._m13 + lhs._m44 * rhs._m14),
+    __m14: (lhs.__m14 * rhs.__m11 + lhs.__m24 * rhs.__m12) +
+    (lhs.__m34 * rhs.__m13 + lhs.__m44 * rhs.__m14),
 
-    _m21: (lhs._m11 * rhs._m21 + lhs._m21 * rhs._m22) +
-    (lhs._m31 * rhs._m23 + lhs._m41 * rhs._m24),
+    __m21: (lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22) +
+    (lhs.__m31 * rhs.__m23 + lhs.__m41 * rhs.__m24),
 
-    _m22: (lhs._m12 * rhs._m21 + lhs._m22 * rhs._m22) +
-    (lhs._m32 * rhs._m23 + lhs._m42 * rhs._m24),
+    __m22: (lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22) +
+    (lhs.__m32 * rhs.__m23 + lhs.__m42 * rhs.__m24),
 
-    _m23: (lhs._m13 * rhs._m21 + lhs._m23 * rhs._m22) +
-    (lhs._m33 * rhs._m23 + lhs._m43 * rhs._m24),
+    __m23: (lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22) +
+    (lhs.__m33 * rhs.__m23 + lhs.__m43 * rhs.__m24),
 
-    _m24: (lhs._m14 * rhs._m21 + lhs._m24 * rhs._m22) +
-    (lhs._m34 * rhs._m23 + lhs._m44 * rhs._m24),
+    __m24: (lhs.__m14 * rhs.__m21 + lhs.__m24 * rhs.__m22) +
+    (lhs.__m34 * rhs.__m23 + lhs.__m44 * rhs.__m24),
 
-    _m31: (lhs._m11 * rhs._m31 + lhs._m21 * rhs._m32) +
-    (lhs._m31 * rhs._m33 + lhs._m41 * rhs._m34),
+    __m31: (lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32) +
+    (lhs.__m31 * rhs.__m33 + lhs.__m41 * rhs.__m34),
 
-    _m32: (lhs._m12 * rhs._m31 + lhs._m22 * rhs._m32) +
-    (lhs._m32 * rhs._m33 + lhs._m42 * rhs._m34),
+    __m32: (lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32) +
+    (lhs.__m32 * rhs.__m33 + lhs.__m42 * rhs.__m34),
 
-    _m33: (lhs._m13 * rhs._m31 + lhs._m23 * rhs._m32) +
-    (lhs._m33 * rhs._m33 + lhs._m43 * rhs._m34),
+    __m33: (lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32) +
+    (lhs.__m33 * rhs.__m33 + lhs.__m43 * rhs.__m34),
 
-    _m34: (lhs._m14 * rhs._m31 + lhs._m24 * rhs._m32) +
-    (lhs._m34 * rhs._m33 + lhs._m44 * rhs._m34),
+    __m34: (lhs.__m14 * rhs.__m31 + lhs.__m24 * rhs.__m32) +
+    (lhs.__m34 * rhs.__m33 + lhs.__m44 * rhs.__m34),
 
-    _m41: (lhs._m11 * rhs._m41 + lhs._m21 * rhs._m42) +
-    (lhs._m31 * rhs._m43 + lhs._m41 * rhs._m44),
+    __m41: (lhs.__m11 * rhs.__m41 + lhs.__m21 * rhs.__m42) +
+    (lhs.__m31 * rhs.__m43 + lhs.__m41 * rhs.__m44),
 
-    _m42: (lhs._m12 * rhs._m41 + lhs._m22 * rhs._m42) +
-    (lhs._m32 * rhs._m43 + lhs._m42 * rhs._m44),
+    __m42: (lhs.__m12 * rhs.__m41 + lhs.__m22 * rhs.__m42) +
+    (lhs.__m32 * rhs.__m43 + lhs.__m42 * rhs.__m44),
 
-    _m43: (lhs._m13 * rhs._m41 + lhs._m23 * rhs._m42) +
-    (lhs._m33 * rhs._m43 + lhs._m43 * rhs._m44),
+    __m43: (lhs.__m13 * rhs.__m41 + lhs.__m23 * rhs.__m42) +
+    (lhs.__m33 * rhs.__m43 + lhs.__m43 * rhs.__m44),
 
-    _m44: (lhs._m14 * rhs._m41 + lhs._m24 * rhs._m42) +
-    (lhs._m34 * rhs._m43 + lhs._m44 * rhs._m44)
+    __m44: (lhs.__m14 * rhs.__m41 + lhs.__m24 * rhs.__m42) +
+    (lhs.__m34 * rhs.__m43 + lhs.__m44 * rhs.__m44)
   )
 }
 
 func *<T: InstantiableMatrix4Type>(lhs: Scalar, rhs: T) -> T {
   return T(
-    _m11: lhs * rhs._m11, _m12: lhs * rhs._m12, _m13: lhs * rhs._m13, _m14: lhs * rhs._m14,
-    _m21: lhs * rhs._m21, _m22: lhs * rhs._m22, _m23: lhs * rhs._m23, _m24: lhs * rhs._m24,
-    _m31: lhs * rhs._m31, _m32: lhs * rhs._m32, _m33: lhs * rhs._m33, _m34: lhs * rhs._m34,
-    _m41: lhs * rhs._m41, _m42: lhs * rhs._m42, _m43: lhs * rhs._m43, _m44: lhs * rhs._m44
+    __m11: lhs * rhs.__m11, __m12: lhs * rhs.__m12, __m13: lhs * rhs.__m13, __m14: lhs * rhs.__m14,
+    __m21: lhs * rhs.__m21, __m22: lhs * rhs.__m22, __m23: lhs * rhs.__m23, __m24: lhs * rhs.__m24,
+    __m31: lhs * rhs.__m31, __m32: lhs * rhs.__m32, __m33: lhs * rhs.__m33, __m34: lhs * rhs.__m34,
+    __m41: lhs * rhs.__m41, __m42: lhs * rhs.__m42, __m43: lhs * rhs.__m43, __m44: lhs * rhs.__m44
   )
 }
 
 func *<T: InstantiableMatrix4Type>(lhs: T, rhs: Scalar) -> T {
   return T(
-    _m11: lhs._m11 * rhs, _m12: lhs._m12 * rhs, _m13: lhs._m13 * rhs, _m14: lhs._m14 * rhs,
-    _m21: lhs._m21 * rhs, _m22: lhs._m22 * rhs, _m23: lhs._m23 * rhs, _m24: lhs._m24 * rhs,
-    _m31: lhs._m31 * rhs, _m32: lhs._m32 * rhs, _m33: lhs._m33 * rhs, _m34: lhs._m34 * rhs,
-    _m41: lhs._m41 * rhs, _m42: lhs._m42 * rhs, _m43: lhs._m43 * rhs, _m44: lhs._m44 * rhs
+    __m11: lhs.__m11 * rhs, __m12: lhs.__m12 * rhs, __m13: lhs.__m13 * rhs, __m14: lhs.__m14 * rhs,
+    __m21: lhs.__m21 * rhs, __m22: lhs.__m22 * rhs, __m23: lhs.__m23 * rhs, __m24: lhs.__m24 * rhs,
+    __m31: lhs.__m31 * rhs, __m32: lhs.__m32 * rhs, __m33: lhs.__m33 * rhs, __m34: lhs.__m34 * rhs,
+    __m41: lhs.__m41 * rhs, __m42: lhs.__m42 * rhs, __m43: lhs.__m43 * rhs, __m44: lhs.__m44 * rhs
   )
 }
 
@@ -1162,111 +1162,111 @@ struct Matrix4 {
 }
 
 extension Vector2: Vector2Type {
-  var _x: Scalar { return x }
-  var _y: Scalar { return y }
+  var __x: Scalar { return x }
+  var __y: Scalar { return y }
 }
 
 extension Vector3: Vector3Type {
-  var _x: Scalar { return x }
-  var _y: Scalar { return y }
-  var _z: Scalar { return z }
+  var __x: Scalar { return x }
+  var __y: Scalar { return y }
+  var __z: Scalar { return z }
 }
 
 extension Vector4: Vector4Type {
-  var _x: Scalar { return x }
-  var _y: Scalar { return y }
-  var _z: Scalar { return z }
-  var _w: Scalar { return w }
+  var __x: Scalar { return x }
+  var __y: Scalar { return y }
+  var __z: Scalar { return z }
+  var __w: Scalar { return w }
 }
 
 extension Quaternion: QuaternionType {
-  var _x: Scalar { return x }
-  var _y: Scalar { return y }
-  var _z: Scalar { return z }
-  var _w: Scalar { return w }
+  var __x: Scalar { return x }
+  var __y: Scalar { return y }
+  var __z: Scalar { return z }
+  var __w: Scalar { return w }
 }
 
 extension Matrix3: Matrix3Type {
-  var _m11: Scalar { return m11 }
-  var _m12: Scalar { return m12 }
-  var _m13: Scalar { return m13 }
-  var _m21: Scalar { return m21 }
-  var _m22: Scalar { return m22 }
-  var _m23: Scalar { return m23 }
-  var _m31: Scalar { return m31 }
-  var _m32: Scalar { return m32 }
-  var _m33: Scalar { return m33 }
+  var __m11: Scalar { return m11 }
+  var __m12: Scalar { return m12 }
+  var __m13: Scalar { return m13 }
+  var __m21: Scalar { return m21 }
+  var __m22: Scalar { return m22 }
+  var __m23: Scalar { return m23 }
+  var __m31: Scalar { return m31 }
+  var __m32: Scalar { return m32 }
+  var __m33: Scalar { return m33 }
 }
 
 extension Matrix4: Matrix4Type {
-  var _m11: Scalar { return m11 }
-  var _m12: Scalar { return m12 }
-  var _m13: Scalar { return m13 }
-  var _m14: Scalar { return m14 }
-  var _m21: Scalar { return m21 }
-  var _m22: Scalar { return m22 }
-  var _m23: Scalar { return m23 }
-  var _m24: Scalar { return m24 }
-  var _m31: Scalar { return m31 }
-  var _m32: Scalar { return m32 }
-  var _m33: Scalar { return m33 }
-  var _m34: Scalar { return m34 }
-  var _m41: Scalar { return m41 }
-  var _m42: Scalar { return m42 }
-  var _m43: Scalar { return m43 }
-  var _m44: Scalar { return m44 }
+  var __m11: Scalar { return m11 }
+  var __m12: Scalar { return m12 }
+  var __m13: Scalar { return m13 }
+  var __m14: Scalar { return m14 }
+  var __m21: Scalar { return m21 }
+  var __m22: Scalar { return m22 }
+  var __m23: Scalar { return m23 }
+  var __m24: Scalar { return m24 }
+  var __m31: Scalar { return m31 }
+  var __m32: Scalar { return m32 }
+  var __m33: Scalar { return m33 }
+  var __m34: Scalar { return m34 }
+  var __m41: Scalar { return m41 }
+  var __m42: Scalar { return m42 }
+  var __m43: Scalar { return m43 }
+  var __m44: Scalar { return m44 }
 }
 
 extension Vector2: InstantiableVector2Type {
-  init(_x: Scalar, _y: Scalar) {
-    self.init(_x, _y)
+  init(__x: Scalar, __y: Scalar) {
+    self.init(__x, __y)
   }
 }
 
 extension Vector3: InstantiableVector3Type {
-  init(_x: Scalar, _y: Scalar, _z: Scalar) {
-    self.init(_x, _y, _z)
+  init(__x: Scalar, __y: Scalar, __z: Scalar) {
+    self.init(__x, __y, __z)
   }
 }
 
 extension Vector4: InstantiableVector4Type {
-  init(_x: Scalar, _y: Scalar, _z: Scalar, _w: Scalar) {
-    self.init(_x, _y, _z, _w)
+  init(__x: Scalar, __y: Scalar, __z: Scalar, __w: Scalar) {
+    self.init(__x, __y, __z, __w)
   }
 }
 
 extension Quaternion: InstantiableQuaternionType {
-  init(_x: Scalar, _y: Scalar, _z: Scalar, _w: Scalar) {
-    self.init(_x, _y, _z, _w)
+  init(__x: Scalar, __y: Scalar, __z: Scalar, __w: Scalar) {
+    self.init(__x, __y, __z, __w)
   }
 }
 
 extension Matrix3: InstantiableMatrix3Type {
   init(
-    _m11: Scalar, _m12: Scalar, _m13: Scalar,
-    _m21: Scalar, _m22: Scalar, _m23: Scalar,
-    _m31: Scalar, _m32: Scalar, _m33: Scalar
+    __m11: Scalar, __m12: Scalar, __m13: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar
   ) {
     self.init(
-      _m11, _m12, _m13,
-      _m21, _m22, _m23,
-      _m31, _m32, _m33
+      __m11, __m12, __m13,
+      __m21, __m22, __m23,
+      __m31, __m32, __m33
     )
   }
 }
 
 extension Matrix4: InstantiableMatrix4Type {
   init(
-    _m11: Scalar, _m12: Scalar, _m13: Scalar, _m14: Scalar,
-    _m21: Scalar, _m22: Scalar, _m23: Scalar, _m24: Scalar,
-    _m31: Scalar, _m32: Scalar, _m33: Scalar, _m34: Scalar,
-    _m41: Scalar, _m42: Scalar, _m43: Scalar, _m44: Scalar
+    __m11: Scalar, __m12: Scalar, __m13: Scalar, __m14: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar, __m24: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar, __m34: Scalar,
+    __m41: Scalar, __m42: Scalar, __m43: Scalar, __m44: Scalar
   ) {
     self.init(
-      _m11, _m12, _m13, _m14,
-      _m21, _m22, _m23, _m24,
-      _m31, _m32, _m33, _m34,
-      _m41, _m42, _m43, _m44
+      __m11, __m12, __m13, __m14,
+      __m21, __m22, __m23, __m24,
+      __m31, __m32, __m33, __m34,
+      __m41, __m42, __m43, __m44
     )
   }
 }
@@ -1287,7 +1287,7 @@ extension Vector2: Equatable, Hashable {
   static let Y = Vector2(0, 1)
 
   var hashValue: Int {
-    return _x.hashValue &+ _y.hashValue
+    return __x.hashValue &+ __y.hashValue
   }
 
   init(_ x: Scalar, _ y: Scalar) {
@@ -1302,7 +1302,7 @@ extension Vector2: Equatable, Hashable {
   }
 
   init(_ v: Vector2Type) {
-    self.init(v._x, v._y)
+    self.init(v.__x, v.__y)
   }
 }
 
@@ -1313,7 +1313,7 @@ extension Vector3: Equatable, Hashable {
   static let Z = Vector3(0, 0, 1)
 
   var hashValue: Int {
-    return _x.hashValue &+ _y.hashValue &+ _z.hashValue
+    return __x.hashValue &+ __y.hashValue &+ __z.hashValue
   }
 
   init(_ x: Scalar, _ y: Scalar, _ z: Scalar) {
@@ -1329,7 +1329,7 @@ extension Vector3: Equatable, Hashable {
   }
 
   init(_ v: Vector3Type) {
-    self.init(v._x, v._y, v._z)
+    self.init(v.__x, v.__y, v.__z)
   }
 }
 
@@ -1341,7 +1341,7 @@ extension Vector4: Equatable, Hashable {
   static let W = Vector4(0, 0, 0, 1)
 
   var hashValue: Int {
-    return _x.hashValue &+ _y.hashValue &+ _z.hashValue &+ _w.hashValue
+    return __x.hashValue &+ __y.hashValue &+ __z.hashValue &+ __w.hashValue
   }
 
   init(_ x: Scalar, _ y: Scalar, _ z: Scalar, _ w: Scalar) {
@@ -1358,7 +1358,7 @@ extension Vector4: Equatable, Hashable {
   }
 
   init(_ v: Vector4Type) {
-    self.init(v._x, v._y, v._z, v._w)
+    self.init(v.__x, v.__y, v.__z, v.__w)
   }
 }
 
@@ -1445,12 +1445,12 @@ extension Quaternion: Equatable, Hashable {
   }
 
   init(_ v: QuaternionType) {
-    self.init(v._x, v._y, v._z, v._w)
+    self.init(v.__x, v.__y, v.__z, v.__w)
   }
 }
 
 extension Matrix3: Equatable, Hashable {
-  static let Identity = Matrix3(1, 0 ,0 ,0, 1, 0, 0, 0, 1)
+  static let Identity = Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1)
 
   var hashValue: Int {
     var hash = m11.hashValue &+ m12.hashValue &+ m13.hashValue
@@ -1508,9 +1508,9 @@ extension Matrix3: Equatable, Hashable {
 
   init(_ m: Matrix3Type) {
     self.init(
-      m._m11, m._m12, m._m13,
-      m._m21, m._m22, m._m23,
-      m._m31, m._m32, m._m33
+      m.__m11, m.__m12, m.__m13,
+      m.__m21, m.__m22, m.__m23,
+      m.__m31, m.__m32, m.__m33
     )
   }
 }
@@ -1642,10 +1642,10 @@ extension Matrix4: Equatable, Hashable {
 
   init(_ m: Matrix4Type) {
     self.init(
-      m._m11, m._m12, m._m13, m._m14,
-      m._m21, m._m22, m._m23, m._m24,
-      m._m31, m._m32, m._m33, m._m34,
-      m._m41, m._m42, m._m43, m._m44
+      m.__m11, m.__m12, m.__m13, m.__m14,
+      m.__m21, m.__m22, m.__m23, m.__m24,
+      m.__m31, m.__m32, m.__m33, m.__m34,
+      m.__m41, m.__m42, m.__m43, m.__m44
     )
   }
 }

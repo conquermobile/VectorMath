@@ -34,48 +34,48 @@
 import SceneKit
 
 extension SCNVector3: Vector3Type {
-  var _x: Scalar { return Scalar(x) }
-  var _y: Scalar { return Scalar(y) }
-  var _z: Scalar { return Scalar(z) }
+  var __x: Scalar { return Scalar(x) }
+  var __y: Scalar { return Scalar(y) }
+  var __z: Scalar { return Scalar(z) }
 }
 
 extension SCNVector4: Vector4Type {
-  var _x: Scalar { return Scalar(x) }
-  var _y: Scalar { return Scalar(y) }
-  var _z: Scalar { return Scalar(z) }
-  var _w: Scalar { return Scalar(w) }
+  var __x: Scalar { return Scalar(x) }
+  var __y: Scalar { return Scalar(y) }
+  var __z: Scalar { return Scalar(z) }
+  var __w: Scalar { return Scalar(w) }
 }
 
 extension SCNQuaternion: QuaternionType {}
 
 extension SCNMatrix4: Matrix4Type {
-  var _m11: Scalar { return Scalar(m11) }
-  var _m12: Scalar { return Scalar(m12) }
-  var _m13: Scalar { return Scalar(m13) }
-  var _m14: Scalar { return Scalar(m14) }
-  var _m21: Scalar { return Scalar(m21) }
-  var _m22: Scalar { return Scalar(m22) }
-  var _m23: Scalar { return Scalar(m23) }
-  var _m24: Scalar { return Scalar(m24) }
-  var _m31: Scalar { return Scalar(m31) }
-  var _m32: Scalar { return Scalar(m32) }
-  var _m33: Scalar { return Scalar(m33) }
-  var _m34: Scalar { return Scalar(m34) }
-  var _m41: Scalar { return Scalar(m41) }
-  var _m42: Scalar { return Scalar(m42) }
-  var _m43: Scalar { return Scalar(m43) }
-  var _m44: Scalar { return Scalar(m44) }
+  var __m11: Scalar { return Scalar(m11) }
+  var __m12: Scalar { return Scalar(m12) }
+  var __m13: Scalar { return Scalar(m13) }
+  var __m14: Scalar { return Scalar(m14) }
+  var __m21: Scalar { return Scalar(m21) }
+  var __m22: Scalar { return Scalar(m22) }
+  var __m23: Scalar { return Scalar(m23) }
+  var __m24: Scalar { return Scalar(m24) }
+  var __m31: Scalar { return Scalar(m31) }
+  var __m32: Scalar { return Scalar(m32) }
+  var __m33: Scalar { return Scalar(m33) }
+  var __m34: Scalar { return Scalar(m34) }
+  var __m41: Scalar { return Scalar(m41) }
+  var __m42: Scalar { return Scalar(m42) }
+  var __m43: Scalar { return Scalar(m43) }
+  var __m44: Scalar { return Scalar(m44) }
 }
 
 extension SCNVector3: InstantiableVector3Type {
-  init(_x: Scalar, _y: Scalar, _z: Scalar) {
-    self.init(x: Float(_x), y: Float(_y), z: Float(_z))
+  init(__x: Scalar, __y: Scalar, __z: Scalar) {
+    self.init(x: Float(__x), y: Float(__y), z: Float(__z))
   }
 }
 
 extension SCNVector4: InstantiableVector4Type {
-  init(_x: Scalar, _y: Scalar, _z: Scalar, _w: Scalar) {
-    self.init(x: Float(_x), y: Float(_y), z: Float(_z), w: Float(_w))
+  init(__x: Scalar, __y: Scalar, __z: Scalar, __w: Scalar) {
+    self.init(x: Float(__x), y: Float(__y), z: Float(__z), w: Float(__w))
   }
 }
 
@@ -83,16 +83,16 @@ extension SCNQuaternion : InstantiableQuaternionType {}
 
 extension SCNMatrix4 : InstantiableMatrix4Type {
   init(
-    _m11: Scalar, _m12: Scalar, _m13: Scalar, _m14: Scalar,
-    _m21: Scalar, _m22: Scalar, _m23: Scalar, _m24: Scalar,
-    _m31: Scalar, _m32: Scalar, _m33: Scalar, _m34: Scalar,
-    _m41: Scalar, _m42: Scalar, _m43: Scalar, _m44: Scalar
+    __m11: Scalar, __m12: Scalar, __m13: Scalar, __m14: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar, __m24: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar, __m34: Scalar,
+    __m41: Scalar, __m42: Scalar, __m43: Scalar, __m44: Scalar
   ) {
     self.init(
-      m11: Float(_m11), m12: Float(_m12), m13: Float(_m13), m14: Float(_m14),
-      m21: Float(_m21), m22: Float(_m22), m23: Float(_m23), m24: Float(_m24),
-      m31: Float(_m31), m32: Float(_m32), m33: Float(_m33), m34: Float(_m34),
-      m41: Float(_m41), m42: Float(_m42), m43: Float(_m43), m44: Float(_m44)
+      m11: Float(__m11), m12: Float(__m12), m13: Float(__m13), m14: Float(__m14),
+      m21: Float(__m21), m22: Float(__m22), m23: Float(__m23), m24: Float(__m24),
+      m31: Float(__m31), m32: Float(__m32), m33: Float(__m33), m34: Float(__m34),
+      m41: Float(__m41), m42: Float(__m42), m43: Float(__m43), m44: Float(__m44)
     )
   }
 }
