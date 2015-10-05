@@ -632,6 +632,67 @@ extension InstantiableQuaternionType {
     let t2 = (q - (self * dot)).normalized() * sin(theta)
     return t1 + t2
   }
+
+  init(axisAngle: Vector4Type) {
+    let r = axisAngle.__w * 0.5
+    let scale = sin(r)
+    let xyzVector: Vector3 = axisAngle.xyz()
+    let a = xyzVector * scale
+    self.init(__x: a.__x, __y: a.__y, __z: a.__z, __w: cos(r))
+  }
+
+  init(pitch: Scalar, yaw: Scalar, roll: Scalar) {
+    let sy = sin(yaw * 0.5)
+    let cy = cos(yaw * 0.5)
+    let sz = sin(roll * 0.5)
+    let cz = cos(roll * 0.5)
+    let sx = sin(pitch * 0.5)
+    let cx = cos(pitch * 0.5)
+
+    self.init(
+      __x: cy * cz * cx - sy * sz * sx,
+      __y: sy * sz * cx + cy * cz * sx,
+      __z: sy * cz * cx + cy * sz * sx,
+      __w: cy * sz * cx - sy * cz * sx
+    )
+  }
+
+  init(rotationMatrix m: Matrix4Type) {
+    let diagonal = m.__m11 + m.__m22 + m.__m33 + 1
+    if diagonal ~= 0 {
+      let scale = sqrt(diagonal) * 2
+      self.init(
+        __x: (m.__m32 - m.__m23) / scale,
+        __y: (m.__m13 - m.__m31) / scale,
+        __z: (m.__m21 - m.__m12) / scale,
+        __w: 0.25 * scale
+      )
+    } else if m.__m11 > max(m.__m22, m.__m33) {
+      let scale = sqrt(1 + m.__m11 - m.__m22 - m.__m33) * 2
+      self.init(
+        __x: 0.25 * scale,
+        __y: (m.__m21 + m.__m12) / scale,
+        __z: (m.__m13 + m.__m31) / scale,
+        __w: (m.__m32 - m.__m23) / scale
+      )
+    } else if m.__m22 > m.__m33 {
+      let scale = sqrt(1 + m.__m22 - m.__m11 - m.__m33) * 2
+      self.init(
+        __x: (m.__m21 + m.__m12) / scale,
+        __y: 0.25 * scale,
+        __z: (m.__m32 + m.__m23) / scale,
+        __w: (m.__m13 - m.__m31) / scale
+      )
+    } else {
+      let scale = sqrt(1 + m.__m33 - m.__m11 - m.__m22) * 2
+      self.init(
+        __x: (m.__m13 + m.__m31) / scale,
+        __y: (m.__m32 + m.__m23) / scale,
+        __z: 0.25 * scale,
+        __w: (m.__m21 - m.__m12) / scale
+      )
+    }
+  }
 }
 
 func *<T: InstantiableQuaternionType>(lhs: T, rhs: T) -> T {
@@ -726,6 +787,32 @@ extension InstantiableMatrix3Type {
       __m31: __m31 + (m.__m31 - __m31) * t,
       __m32: __m32 + (m.__m32 - __m32) * t,
       __m33: __m33 + (m.__m33 - __m33) * t
+    )
+  }
+
+  init(scale: Vector2Type) {
+    self.init(
+      __m11: scale.__x, __m12: 0, __m13: 0,
+      __m21: 0, __m22: scale.__y, __m23: 0,
+      __m31: 0, __m32: 0, __m33: 1
+    )
+  }
+
+  init(translation: Vector2Type) {
+    self.init(
+      __m11: 1, __m12: 0, __m13: 0,
+      __m21: 0, __m22: 1, __m23: 0,
+      __m31: translation.__x, __m32: translation.__y, __m33: 1
+    )
+  }
+
+  init(rotation radians: Scalar) {
+    let cs = cos(radians)
+    let sn = sin(radians)
+    self.init(
+      __m11: cs, __m12: sn, __m13: 0,
+      __m21: -sn, __m22: cs, __m23: 0,
+      __m31: 0, __m32: 0, __m33: 1
     )
   }
 }
@@ -916,6 +1003,82 @@ extension InstantiableMatrix4Type {
     let adjugate = self.adjugate
     let determinant = determinantForAdjugate(adjugate)
     return adjugate * (1 / determinant)
+  }
+
+  init(scale s: Vector3Type) {
+    self.init(
+      __m11: s.__x, __m12: 0, __m13: 0, __m14: 0,
+      __m21: 0, __m22: s.__y, __m23: 0, __m24: 0,
+      __m31: 0, __m32: 0, __m33: s.__z, __m34: 0,
+      __m41: 0, __m42: 0, __m43: 0, __m44: 1
+    )
+  }
+
+  init(translation t: Vector3Type) {
+    self.init(
+      __m11: 1, __m12: 0, __m13: 0, __m14: 0,
+      __m21: 0, __m22: 1, __m23: 0, __m24: 0,
+      __m31: 0, __m32: 0, __m33: 1, __m34: 0,
+      __m41: t.__x, __m42: t.__y, __m43: t.__z, __m44: 1
+    )
+  }
+
+  init(rotation axisAngle: Vector4Type) {
+    self.init(quaternion: Quaternion(axisAngle: axisAngle))
+  }
+
+  init(quaternion q: QuaternionType) {
+    self.init(
+      __m11: 1 - 2 * (q.__y * q.__y + q.__z * q.__z), __m12: 2 * (q.__x * q.__y + q.__z * q.__w),
+      __m13: 2 * (q.__x * q.__z - q.__y * q.__w), __m14: 0,
+
+      __m21: 2 * (q.__x * q.__y - q.__z * q.__w), __m22: 1 - 2 * (q.__x * q.__x + q.__z * q.__z),
+      __m23: 2 * (q.__y * q.__z + q.__x * q.__w), __m24: 0,
+
+      __m31: 2 * (q.__x * q.__z + q.__y * q.__w), __m32: 2 * (q.__y * q.__z - q.__x * q.__w),
+      __m33: 1 - 2 * (q.__x * q.__x + q.__y * q.__y), __m34: 0,
+
+      __m41: 0, __m42: 0, __m43: 0, __m44: 1
+    )
+  }
+
+  init(fovx: Scalar, fovy: Scalar, near: Scalar, far: Scalar) {
+    self.init(fovy: fovy, aspect: fovx / fovy, near: near, far: far)
+  }
+
+  init(fovx: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    self.init(fovy: fovx / aspect, aspect: aspect, near: near, far: far)
+  }
+
+  init(fovy: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
+    let dz = far - near
+
+    assert(dz > 0, "far value must be greater than near")
+    assert(fovy > 0, "field of view must be nonzero and positive")
+    assert(aspect > 0, "aspect ratio must be nonzero and positive")
+
+    let r = fovy / 2
+    let cotangent = cos(r) / sin(r)
+
+    self.init(
+      __m11: cotangent / aspect, __m12: 0, __m13: 0, __m14: 0,
+      __m21: 0, __m22: cotangent, __m23: 0, __m24: 0,
+      __m31: 0, __m32: 0, __m33: -(far + near) / dz, __m34: -1,
+      __m41: 0, __m42: 0, __m43: -2 * near * far / dz, __m44: 0
+    )
+  }
+
+  init(top: Scalar, right: Scalar, bottom: Scalar, left: Scalar, near: Scalar, far: Scalar) {
+    let dx = right - left
+    let dy = top - bottom
+    let dz = far - near
+
+    self.init(
+      __m11: 2 / dx, __m12: 0, __m13: 0, __m14: 0,
+      __m21: 0, __m22: 2 / dy, __m23: 0, __m24: 0,
+      __m31: 0, __m32: 0, __m33: -2 / dz, __m34: 0,
+      __m41: -(right + left) / dx, __m42: -(top + bottom) / dy, __m43: -(far + near) / dz, __m44: 1
+    )
   }
 }
 
@@ -1374,67 +1537,6 @@ extension Quaternion: Equatable, Hashable {
     self.init(x: x, y: y, z: z, w: w)
   }
 
-  init(axisAngle: Vector4) {
-    let r = axisAngle.w * 0.5
-    let scale = sin(r)
-    let xyzVector: Vector3 = axisAngle.xyz()
-    let a = xyzVector * scale
-    self.init(a.x, a.y, a.z, cos(r))
-  }
-
-  init(pitch: Scalar, yaw: Scalar, roll: Scalar) {
-    let sy = sin(yaw * 0.5)
-    let cy = cos(yaw * 0.5)
-    let sz = sin(roll * 0.5)
-    let cz = cos(roll * 0.5)
-    let sx = sin(pitch * 0.5)
-    let cx = cos(pitch * 0.5)
-
-    self.init(
-      cy * cz * cx - sy * sz * sx,
-      sy * sz * cx + cy * cz * sx,
-      sy * cz * cx + cy * sz * sx,
-      cy * sz * cx - sy * cz * sx
-    )
-  }
-
-  init(rotationMatrix m: Matrix4) {
-    let diagonal = m.m11 + m.m22 + m.m33 + 1
-    if diagonal ~= 0 {
-      let scale = sqrt(diagonal) * 2
-      self.init(
-        (m.m32 - m.m23) / scale,
-        (m.m13 - m.m31) / scale,
-        (m.m21 - m.m12) / scale,
-        0.25 * scale
-      )
-    } else if m.m11 > max(m.m22, m.m33) {
-      let scale = sqrt(1 + m.m11 - m.m22 - m.m33) * 2
-      self.init(
-        0.25 * scale,
-        (m.m21 + m.m12) / scale,
-        (m.m13 + m.m31) / scale,
-        (m.m32 - m.m23) / scale
-      )
-    } else if m.m22 > m.m33 {
-      let scale = sqrt(1 + m.m22 - m.m11 - m.m33) * 2
-      self.init(
-        (m.m21 + m.m12) / scale,
-        0.25 * scale,
-        (m.m32 + m.m23) / scale,
-        (m.m13 - m.m31) / scale
-      )
-    } else {
-      let scale = sqrt(1 + m.m33 - m.m11 - m.m22) * 2
-      self.init(
-        (m.m13 + m.m31) / scale,
-        (m.m32 + m.m23) / scale,
-        0.25 * scale,
-        (m.m21 - m.m12) / scale
-      )
-    }
-  }
-
   init(_ v: [Scalar]) {
     assert(v.count == 4, "array must contain 4 elements, contained \(v.count)")
 
@@ -1472,32 +1574,6 @@ extension Matrix3: Equatable, Hashable {
     self.m31 = m31 // 6
     self.m32 = m32 // 7
     self.m33 = m33 // 8
-  }
-
-  init(scale: Vector2) {
-    self.init(
-      scale.x, 0, 0,
-      0, scale.y, 0,
-      0, 0, 1
-    )
-  }
-
-  init(translation: Vector2) {
-    self.init(
-      1, 0, 0,
-      0, 1, 0,
-      translation.x, translation.y, 1
-    )
-  }
-
-  init(rotation radians: Scalar) {
-    let cs = cos(radians)
-    let sn = sin(radians)
-    self.init(
-      cs, sn, 0,
-      -sn, cs, 0,
-      0, 0, 1
-    )
   }
 
   init(_ m: [Scalar]) {
@@ -1547,76 +1623,6 @@ extension Matrix4: Equatable, Hashable {
     self.m42 = m42 // 13
     self.m43 = m43 // 14
     self.m44 = m44 // 15
-  }
-
-  init(scale s: Vector3) {
-    self.init(
-      s.x, 0, 0, 0,
-      0, s.y, 0, 0,
-      0, 0, s.z, 0,
-      0, 0, 0, 1
-    )
-  }
-
-  init(translation t: Vector3) {
-    self.init(
-      1, 0, 0, 0,
-      0, 1, 0, 0,
-      0, 0, 1, 0,
-      t.x, t.y, t.z, 1
-    )
-  }
-
-  init(rotation axisAngle: Vector4) {
-    self.init(quaternion: Quaternion(axisAngle: axisAngle))
-  }
-
-  init(quaternion q: Quaternion) {
-    self.init(
-      1 - 2 * (q.y * q.y + q.z * q.z), 2 * (q.x * q.y + q.z * q.w), 2 * (q.x * q.z - q.y * q.w), 0,
-      2 * (q.x * q.y - q.z * q.w), 1 - 2 * (q.x * q.x + q.z * q.z), 2 * (q.y * q.z + q.x * q.w), 0,
-      2 * (q.x * q.z + q.y * q.w), 2 * (q.y * q.z - q.x * q.w), 1 - 2 * (q.x * q.x + q.y * q.y), 0,
-      0, 0, 0, 1
-    )
-  }
-
-  init(fovx: Scalar, fovy: Scalar, near: Scalar, far: Scalar) {
-    self.init(fovy: fovy, aspect: fovx / fovy, near: near, far: far)
-  }
-
-  init(fovx: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
-    self.init(fovy: fovx / aspect, aspect: aspect, near: near, far: far)
-  }
-
-  init(fovy: Scalar, aspect: Scalar, near: Scalar, far: Scalar) {
-    let dz = far - near
-
-    assert(dz > 0, "far value must be greater than near")
-    assert(fovy > 0, "field of view must be nonzero and positive")
-    assert(aspect > 0, "aspect ratio must be nonzero and positive")
-
-    let r = fovy / 2
-    let cotangent = cos(r) / sin(r)
-
-    self.init(
-      cotangent / aspect, 0, 0, 0,
-      0, cotangent, 0, 0,
-      0, 0, -(far + near) / dz, -1,
-      0, 0, -2 * near * far / dz, 0
-    )
-  }
-
-  init(top: Scalar, right: Scalar, bottom: Scalar, left: Scalar, near: Scalar, far: Scalar) {
-    let dx = right - left
-    let dy = top - bottom
-    let dz = far - near
-
-    self.init(
-      2 / dx, 0, 0, 0,
-      0, 2 / dy, 0, 0,
-      0, 0, -2 / dz, 0,
-      -(right + left) / dx, -(top + bottom) / dy, -(far + near) / dz, 1
-    )
   }
 
   init(_ m: [Scalar]) {
