@@ -89,10 +89,10 @@ extension SCNMatrix4 : InstantiableMatrix4Type {
     _m41: Scalar, _m42: Scalar, _m43: Scalar, _m44: Scalar
   ) {
     self.init(
-      _m11: _m11, _m12: _m12, _m13: _m13, _m14: _m14,
-      _m21: _m21, _m22: _m22, _m23: _m23, _m24: _m24,
-      _m31: _m31, _m32: _m32, _m33: _m33, _m34: _m34,
-      _m41: _m41, _m42: _m42, _m43: _m43, _m44: _m44
+      m11: Float(_m11), m12: Float(_m12), m13: Float(_m13), m14: Float(_m14),
+      m21: Float(_m21), m22: Float(_m22), m23: Float(_m23), m24: Float(_m24),
+      m31: Float(_m31), m32: Float(_m32), m33: Float(_m33), m34: Float(_m34),
+      m41: Float(_m41), m42: Float(_m42), m43: Float(_m43), m44: Float(_m44)
     )
   }
 }
