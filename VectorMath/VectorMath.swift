@@ -315,7 +315,11 @@ extension InstantiableVector3Type {
   }
 
   func cross(v: Vector3Type) -> Self {
-    return Self(_x: _y * v._z - _z * v._y, _y: _z * v._x - _x * v._z, _z: _x * v._y - _y * v._x)
+    return Self(
+      _x: _y * v._z - _z * v._y,
+      _y: _z * v._x - _x * v._z,
+      _z: _x * v._y - _y * v._x
+    )
   }
 
   func normalized() -> Self {
@@ -384,14 +388,18 @@ func *<T: InstantiableVector3Type>(lhs: T, rhs: Scalar) -> T {
 }
 
 func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix3Type) -> T {
-  return T(_x:
-    lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31, _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32, _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33
+  return T(
+    _x: lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31,
+    _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32,
+    _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33
   )
 }
 
 func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix4Type) -> T {
-  return T(_x:
-    lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31 + rhs._m41, _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32 + rhs._m42, _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33 + rhs._m43
+  return T(
+    _x: lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31 + rhs._m41,
+    _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32 + rhs._m42,
+    _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33 + rhs._m43
   )
 }
 
@@ -546,8 +554,11 @@ func *<T: InstantiableVector4Type>(lhs: T, rhs: Scalar) -> T {
 }
 
 func *<T: InstantiableVector4Type>(lhs: T, rhs: Matrix4Type) -> T {
-  return T(_x:
-    lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31 + lhs._w * rhs._m41, _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32 + lhs._w * rhs._m42, _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33 + lhs._w * rhs._m43, _w: lhs._x * rhs._m14 + lhs._y * rhs._m24 + lhs._z * rhs._m34 + lhs._w * rhs._m44
+  return T(
+    _x: lhs._x * rhs._m11 + lhs._y * rhs._m21 + lhs._z * rhs._m31 + lhs._w * rhs._m41,
+    _y: lhs._x * rhs._m12 + lhs._y * rhs._m22 + lhs._z * rhs._m32 + lhs._w * rhs._m42,
+    _z: lhs._x * rhs._m13 + lhs._y * rhs._m23 + lhs._z * rhs._m33 + lhs._w * rhs._m43,
+    _w: lhs._x * rhs._m14 + lhs._y * rhs._m24 + lhs._z * rhs._m34 + lhs._w * rhs._m44
   )
 }
 
@@ -789,7 +800,12 @@ func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Scalar) -> T {
 
 extension Matrix4Type {
   func toArray() -> [Scalar] {
-    return [_m11, _m12, _m13, _m14, _m21, _m22, _m23, _m24, _m31, _m32, _m33, _m34, _m41, _m42, _m43, _m44]
+    return [
+      _m11, _m12, _m13, _m14,
+      _m21, _m22, _m23, _m24,
+      _m31, _m32, _m33, _m34,
+      _m41, _m42, _m43, _m44
+    ]
   }
 
   private func determinantForAdjugate(m: Matrix4Type) -> Scalar {
