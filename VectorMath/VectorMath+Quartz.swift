@@ -50,24 +50,6 @@ extension CGSize: Vector2Type {
   var __y: Scalar { return Scalar(height) }
 }
 
-extension CGPoint: InstantiableVector2Type {
-  init(__x: Scalar, __y: Scalar) {
-    self.init(x: CGFloat(__x), y: CGFloat(__y))
-  }
-}
-
-extension CGVector: InstantiableVector2Type {
-  init(__x: Scalar, __y: Scalar) {
-    self.init(dx: CGFloat(__x), dy: CGFloat(__y))
-  }
-}
-
-extension CGSize: InstantiableVector2Type {
-  init(__x: Scalar, __y: Scalar) {
-    self.init(width: CGFloat(__x), height: CGFloat(__y))
-  }
-}
-
 extension CGAffineTransform: Matrix3Type {
   var __m11: Scalar { return Scalar(a) }
   var __m12: Scalar { return Scalar(b) }
@@ -78,19 +60,6 @@ extension CGAffineTransform: Matrix3Type {
   var __m31: Scalar { return Scalar(tx) }
   var __m32: Scalar { return Scalar(ty) }
   var __m33: Scalar { return Scalar(1) }
-}
-
-extension CGAffineTransform: InstantiableMatrix3Type {
-  init(
-    __m11: Scalar, __m12: Scalar, __m13: Scalar,
-    __m21: Scalar, __m22: Scalar, __m23: Scalar,
-    __m31: Scalar, __m32: Scalar, __m33: Scalar) {
-    self.init(
-      a: CGFloat(__m11), b: CGFloat(__m12),
-      c: CGFloat(__m21), d: CGFloat(__m22),
-      tx: CGFloat(__m31), ty: CGFloat(__m32)
-    )
-  }
 }
 
 extension CATransform3D: Matrix4Type {
@@ -112,6 +81,37 @@ extension CATransform3D: Matrix4Type {
   var __m44: Scalar { return Scalar(m44) }
 }
 
+extension CGPoint: InstantiableVector2Type {
+  init(__x: Scalar, __y: Scalar) {
+    self.init(x: CGFloat(__x), y: CGFloat(__y))
+  }
+}
+
+extension CGVector: InstantiableVector2Type {
+  init(__x: Scalar, __y: Scalar) {
+    self.init(dx: CGFloat(__x), dy: CGFloat(__y))
+  }
+}
+
+extension CGSize: InstantiableVector2Type {
+  init(__x: Scalar, __y: Scalar) {
+    self.init(width: CGFloat(__x), height: CGFloat(__y))
+  }
+}
+
+extension CGAffineTransform: InstantiableMatrix3Type {
+  init(
+    __m11: Scalar, __m12: Scalar, __m13: Scalar,
+    __m21: Scalar, __m22: Scalar, __m23: Scalar,
+    __m31: Scalar, __m32: Scalar, __m33: Scalar) {
+    self.init(
+      a: CGFloat(__m11), b: CGFloat(__m12),
+      c: CGFloat(__m21), d: CGFloat(__m22),
+      tx: CGFloat(__m31), ty: CGFloat(__m32)
+    )
+  }
+}
+
 extension CATransform3D: InstantiableMatrix4Type {
   init(
     __m11: Scalar, __m12: Scalar, __m13: Scalar, __m14: Scalar,
@@ -126,6 +126,25 @@ extension CATransform3D: InstantiableMatrix4Type {
     )
   }
 }
+
+extension CGPoint {
+  init(_ x: CGFloat, _ y: CGFloat) {
+    self.init(__x: Scalar(x), __y: Scalar(y))
+  }
+}
+
+extension CGVector {
+  init(_ x: CGFloat, _ y: CGFloat) {
+    self.init(__x: Scalar(x), __y: Scalar(y))
+  }
+}
+
+extension CGSize {
+  init(_ x: CGFloat, _ y: CGFloat) {
+    self.init(__x: Scalar(x), __y: Scalar(y))
+  }
+}
+
 
 extension CGPoint {
 
