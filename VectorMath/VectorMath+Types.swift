@@ -31,8 +31,6 @@
 //  3. This notice may not be removed or altered from any source distribution.
 //
 
-import Foundation
-
 typealias Vector2    = __Vector2
 typealias Vector3    = __Vector3
 typealias Vector4    = __Vector4
