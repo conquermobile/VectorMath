@@ -145,28 +145,28 @@ extension SCNMatrix4 : InstantiableMatrix4Type {
 
 extension SCNVector3 {
 
-    init(_ v: Vector3) {
+    init(_ v: __Vector3) {
         self.init(x: Float(v.x), y: Float(v.y), z: Float(v.z))
     }
 }
 
 extension SCNVector4 {
 
-    init(_ v: Vector4) {
+    init(_ v: __Vector4) {
         self.init(x: Float(v.x), y: Float(v.y), z: Float(v.z), w: Float(v.w))
     }
 }
 
 extension SCNQuaternion {
 
-  init(_ q:Quaternion) {
+  init(_ q:__Quaternion) {
     self.init(x: Float(q.x), y: Float(q.y), z: Float(q.z), w: Float(q.w))
   }
 }
 
 extension SCNMatrix4 {
 
-    init(_ m: Matrix4) {
+    init(_ m: __Matrix4) {
 
         self.init(
             m11: Float(m.m11), m12: Float(m.m12), m13: Float(m.m13), m14: Float(m.m14),
@@ -179,28 +179,28 @@ extension SCNMatrix4 {
 
 //MARK: VectorMath extensions
 
-extension Vector3 {
+extension __Vector3 {
 
     init(_ v: SCNVector3) {
         self.init(x: Scalar(v.x), y: Scalar(v.y), z: Scalar(v.z))
     }
 }
 
-extension Vector4 {
+extension __Vector4 {
 
     init(_ v: SCNVector4) {
         self.init(x: Scalar(v.x), y: Scalar(v.y), z: Scalar(v.z), w: Scalar(v.w))
     }
 }
 
-extension Quaternion {
+extension __Quaternion {
 
   init(_ q: SCNQuaternion) {
     self.init(x: Scalar(q.x), y: Scalar(q.y), z: Scalar(q.z), w: Scalar(q.w))
   }
 }
 
-extension Matrix4 {
+extension __Matrix4 {
 
     init(_ m: SCNMatrix4) {
 

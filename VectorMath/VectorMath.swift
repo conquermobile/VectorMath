@@ -149,8 +149,8 @@ extension Vector2Type {
       return 0
     }
 
-    let t1 = Vector2(self).normalized()
-    let t2 = Vector2(v).normalized()
+    let t1 = __Vector2(self).normalized()
+    let t2 = __Vector2(v).normalized()
     let cross = t1.cross(t2)
     let dot = max(-1, min(1, t1.dot(t2)))
 
@@ -460,7 +460,7 @@ func *<T: InstantiableVector3Type>(lhs: Matrix4Type, rhs: T) -> T {
 }
 
 func *<T: InstantiableVector3Type>(v: T, q: QuaternionType) -> T {
-  let qv: Vector3 = q.xyz()
+  let qv: __Vector3 = q.xyz()
   let uv = qv.cross(v)
   let uuv = qv.cross(uv)
   let sub = uv * 2 * q.__w
@@ -750,7 +750,7 @@ extension QuaternionType {
   }
 
   func toAxisAngle<T: InstantiableVector4Type>() -> T {
-    let xyzVector: Vector3 = xyz()
+    let xyzVector: __Vector3 = xyz()
     let scale = xyzVector.length
     if scale ~~= 0 || scale ~~= .twoPi {
       return T(__x: 0, __y: 0, __z: 1, __w: 0)
@@ -784,7 +784,7 @@ extension InstantiableQuaternionType {
   init(__axisAngle axisAngle: Vector4Type) {
     let r = axisAngle.__w * 0.5
     let scale = sin(r)
-    let xyzVector: Vector3 = axisAngle.xyz()
+    let xyzVector: __Vector3 = axisAngle.xyz()
     let a = xyzVector * scale
     self.init(__x: a.__x, __y: a.__y, __z: a.__z, __w: cos(r))
   }
@@ -1068,7 +1068,7 @@ extension Matrix4Type {
   }
 
   var determinant: Scalar {
-    let copy = Matrix4(self)
+    let copy = __Matrix4(self)
     return determinantForAdjugate(copy.adjugate)
   }
 
@@ -1192,7 +1192,7 @@ extension InstantiableMatrix4Type {
   }
 
   init(__rotation axisAngle: Vector4Type) {
-    self.init(__quaternion: Quaternion(axisAngle: axisAngle))
+    self.init(__quaternion: __Quaternion(axisAngle: axisAngle))
   }
 
   init(__quaternion q: QuaternionType) {
@@ -1448,32 +1448,32 @@ func *=<T: InstantiableMatrix4Type>(inout lhs: T, rhs: Scalar) {
 
 //MARK: Concrete types
 
-struct Vector2 {
+struct __Vector2 {
   var x: Scalar
   var y: Scalar
 }
 
-struct Vector3 {
-  var x: Scalar
-  var y: Scalar
-  var z: Scalar
-}
-
-struct Vector4 {
+struct __Vector3 {
   var x: Scalar
   var y: Scalar
   var z: Scalar
-  var w: Scalar
 }
 
-struct Quaternion {
+struct __Vector4 {
   var x: Scalar
   var y: Scalar
   var z: Scalar
   var w: Scalar
 }
 
-struct Matrix3 {
+struct __Quaternion {
+  var x: Scalar
+  var y: Scalar
+  var z: Scalar
+  var w: Scalar
+}
+
+struct __Matrix3 {
   var m11: Scalar
   var m12: Scalar
   var m13: Scalar
@@ -1485,7 +1485,7 @@ struct Matrix3 {
   var m33: Scalar
 }
 
-struct Matrix4 {
+struct __Matrix4 {
   var m11: Scalar
   var m12: Scalar
   var m13: Scalar
@@ -1504,32 +1504,32 @@ struct Matrix4 {
   var m44: Scalar
 }
 
-extension Vector2: Vector2Type {
+extension __Vector2: Vector2Type {
   var __x: Scalar { return x }
   var __y: Scalar { return y }
 }
 
-extension Vector3: Vector3Type {
-  var __x: Scalar { return x }
-  var __y: Scalar { return y }
-  var __z: Scalar { return z }
-}
-
-extension Vector4: Vector4Type {
+extension __Vector3: Vector3Type {
   var __x: Scalar { return x }
   var __y: Scalar { return y }
   var __z: Scalar { return z }
-  var __w: Scalar { return w }
 }
 
-extension Quaternion: QuaternionType {
+extension __Vector4: Vector4Type {
   var __x: Scalar { return x }
   var __y: Scalar { return y }
   var __z: Scalar { return z }
   var __w: Scalar { return w }
 }
 
-extension Matrix3: Matrix3Type {
+extension __Quaternion: QuaternionType {
+  var __x: Scalar { return x }
+  var __y: Scalar { return y }
+  var __z: Scalar { return z }
+  var __w: Scalar { return w }
+}
+
+extension __Matrix3: Matrix3Type {
   var __m11: Scalar { return m11 }
   var __m12: Scalar { return m12 }
   var __m13: Scalar { return m13 }
@@ -1541,7 +1541,7 @@ extension Matrix3: Matrix3Type {
   var __m33: Scalar { return m33 }
 }
 
-extension Matrix4: Matrix4Type {
+extension __Matrix4: Matrix4Type {
   var __m11: Scalar { return m11 }
   var __m12: Scalar { return m12 }
   var __m13: Scalar { return m13 }
@@ -1560,25 +1560,25 @@ extension Matrix4: Matrix4Type {
   var __m44: Scalar { return m44 }
 }
 
-extension Vector2: InstantiableVector2Type {
+extension __Vector2: InstantiableVector2Type {
   init(__x: Scalar, __y: Scalar) {
     self.init(__x, __y)
   }
 }
 
-extension Vector3: InstantiableVector3Type {
+extension __Vector3: InstantiableVector3Type {
   init(__x: Scalar, __y: Scalar, __z: Scalar) {
     self.init(__x, __y, __z)
   }
 }
 
-extension Vector4: InstantiableVector4Type {
+extension __Vector4: InstantiableVector4Type {
   init(__x: Scalar, __y: Scalar, __z: Scalar, __w: Scalar) {
     self.init(__x, __y, __z, __w)
   }
 }
 
-extension Quaternion: InstantiableQuaternionType {
+extension __Quaternion: InstantiableQuaternionType {
   init(__x: Scalar, __y: Scalar, __z: Scalar, __w: Scalar) {
     self.init(__x, __y, __z, __w)
   }
@@ -1596,7 +1596,7 @@ extension Quaternion: InstantiableQuaternionType {
   }
 }
 
-extension Matrix3: InstantiableMatrix3Type {
+extension __Matrix3: InstantiableMatrix3Type {
   init(
     __m11: Scalar, __m12: Scalar, __m13: Scalar,
     __m21: Scalar, __m22: Scalar, __m23: Scalar,
@@ -1622,7 +1622,7 @@ extension Matrix3: InstantiableMatrix3Type {
   }
 }
 
-extension Matrix4: InstantiableMatrix4Type {
+extension __Matrix4: InstantiableMatrix4Type {
   init(
     __m11: Scalar, __m12: Scalar, __m13: Scalar, __m14: Scalar,
     __m21: Scalar, __m22: Scalar, __m23: Scalar, __m24: Scalar,
@@ -1680,10 +1680,10 @@ extension Scalar {
   static let epsilon: Scalar = 0.0001
 }
 
-extension Vector2: Equatable, Hashable {
-  static let Zero = Vector2(0, 0)
-  static let X = Vector2(1, 0)
-  static let Y = Vector2(0, 1)
+extension __Vector2: Equatable, Hashable {
+  static let Zero = __Vector2(0, 0)
+  static let X = __Vector2(1, 0)
+  static let Y = __Vector2(0, 1)
 
   var hashValue: Int {
     return __x.hashValue &+ __y.hashValue
@@ -1705,11 +1705,11 @@ extension Vector2: Equatable, Hashable {
   }
 }
 
-extension Vector3: Equatable, Hashable {
-  static let Zero = Vector3(0, 0, 0)
-  static let X = Vector3(1, 0, 0)
-  static let Y = Vector3(0, 1, 0)
-  static let Z = Vector3(0, 0, 1)
+extension __Vector3: Equatable, Hashable {
+  static let Zero = __Vector3(0, 0, 0)
+  static let X = __Vector3(1, 0, 0)
+  static let Y = __Vector3(0, 1, 0)
+  static let Z = __Vector3(0, 0, 1)
 
   var hashValue: Int {
     return __x.hashValue &+ __y.hashValue &+ __z.hashValue
@@ -1732,12 +1732,12 @@ extension Vector3: Equatable, Hashable {
   }
 }
 
-extension Vector4: Equatable, Hashable {
-  static let Zero = Vector4(0, 0, 0, 0)
-  static let X = Vector4(1, 0, 0, 0)
-  static let Y = Vector4(0, 1, 0, 0)
-  static let Z = Vector4(0, 0, 1, 0)
-  static let W = Vector4(0, 0, 0, 1)
+extension __Vector4: Equatable, Hashable {
+  static let Zero = __Vector4(0, 0, 0, 0)
+  static let X = __Vector4(1, 0, 0, 0)
+  static let Y = __Vector4(0, 1, 0, 0)
+  static let Z = __Vector4(0, 0, 1, 0)
+  static let W = __Vector4(0, 0, 0, 1)
 
   var hashValue: Int {
     return __x.hashValue &+ __y.hashValue &+ __z.hashValue &+ __w.hashValue
@@ -1761,9 +1761,9 @@ extension Vector4: Equatable, Hashable {
   }
 }
 
-extension Quaternion: Equatable, Hashable {
-  static let Zero = Quaternion(0, 0, 0, 0)
-  static let Identity = Quaternion(0, 0, 0, 1)
+extension __Quaternion: Equatable, Hashable {
+  static let Zero = __Quaternion(0, 0, 0, 0)
+  static let Identity = __Quaternion(0, 0, 0, 1)
 
   var hashValue: Int {
     return x.hashValue &+ y.hashValue &+ z.hashValue &+ w.hashValue
@@ -1787,8 +1787,8 @@ extension Quaternion: Equatable, Hashable {
   }
 }
 
-extension Matrix3: Equatable, Hashable {
-  static let Identity = Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1)
+extension __Matrix3: Equatable, Hashable {
+  static let Identity = __Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1)
 
   var hashValue: Int {
     var hash = m11.hashValue &+ m12.hashValue &+ m13.hashValue
@@ -1827,8 +1827,8 @@ extension Matrix3: Equatable, Hashable {
   }
 }
 
-extension Matrix4: Equatable, Hashable {
-  static let Identity = Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+extension __Matrix4: Equatable, Hashable {
+  static let Identity = __Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 
   var hashValue: Int {
     var hash = m11.hashValue &+ m12.hashValue &+ m13.hashValue &+ m14.hashValue
@@ -1901,51 +1901,51 @@ func ~~=(lhs: Scalar, rhs: Scalar) -> Bool {
   return abs(lhs - rhs) < .epsilon
 }
 
-func ==(lhs: Vector2, rhs: Vector2) -> Bool {
+func ==(lhs: __Vector2, rhs: __Vector2) -> Bool {
   return lhs.vector2IsEqual(rhs)
 }
 
-func ==(lhs: Vector3, rhs: Vector3) -> Bool {
+func ==(lhs: __Vector3, rhs: __Vector3) -> Bool {
   return lhs.vector3IsEqual(rhs)
 }
 
-func ==(lhs: Vector4, rhs: Vector4) -> Bool {
+func ==(lhs: __Vector4, rhs: __Vector4) -> Bool {
   return lhs.vector4IsEqual(rhs)
 }
 
-func ==(lhs: Quaternion, rhs: Quaternion) -> Bool {
+func ==(lhs: __Quaternion, rhs: __Quaternion) -> Bool {
   return lhs.quaternionIsEqual(rhs)
 }
 
-func ==(lhs: Matrix3, rhs: Matrix3) -> Bool {
+func ==(lhs: __Matrix3, rhs: __Matrix3) -> Bool {
   return lhs.matrix3IsEqual(rhs)
 }
 
-func ==(lhs: Matrix4, rhs: Matrix4) -> Bool {
+func ==(lhs: __Matrix4, rhs: __Matrix4) -> Bool {
   return lhs.matrix4IsEqual(rhs)
 }
 
-func ~~=(lhs: Vector2, rhs: Vector2) -> Bool {
+func ~~=(lhs: __Vector2, rhs: __Vector2) -> Bool {
   return lhs.vector2IsApproxEqual(rhs)
 }
 
-func ~~=(lhs: Vector3, rhs: Vector3) -> Bool {
+func ~~=(lhs: __Vector3, rhs: __Vector3) -> Bool {
   return lhs.vector3IsApproxEqual(rhs)
 }
 
-func ~~=(lhs: Vector4, rhs: Vector4) -> Bool {
+func ~~=(lhs: __Vector4, rhs: __Vector4) -> Bool {
   return lhs.vector4IsApproxEqual(rhs)
 }
 
-func ~~=(lhs: Quaternion, rhs: Quaternion) -> Bool {
+func ~~=(lhs: __Quaternion, rhs: __Quaternion) -> Bool {
   return lhs.quaternionIsApproxEqual(rhs)
 }
 
-func ~~=(lhs: Matrix3, rhs: Matrix3) -> Bool {
+func ~~=(lhs: __Matrix3, rhs: __Matrix3) -> Bool {
   return lhs.matrix3IsApproxEqual(rhs)
 }
 
-func ~~=(lhs: Matrix4, rhs: Matrix4) -> Bool {
+func ~~=(lhs: __Matrix4, rhs: __Matrix4) -> Bool {
   return lhs.matrix4IsApproxEqual(rhs)
 }
 

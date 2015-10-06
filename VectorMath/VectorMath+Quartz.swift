@@ -192,28 +192,28 @@ extension CGSize {
 
 extension CGPoint {
 
-    init(_ v: Vector2) {
+    init(_ v: __Vector2) {
         self.init(x: CGFloat(v.x), y: CGFloat(v.y))
     }
 }
 
 extension CGSize {
 
-    init(_ v: Vector2) {
+    init(_ v: __Vector2) {
         self.init(width: CGFloat(v.x), height: CGFloat(v.y))
     }
 }
 
 extension CGVector {
 
-    init(_ v: Vector2) {
+    init(_ v: __Vector2) {
         self.init(dx: CGFloat(v.x), dy: CGFloat(v.y))
     }
 }
 
 extension CGAffineTransform {
 
-    init(_ m: Matrix3) {
+    init(_ m: __Matrix3) {
 
         self.init(
             a: CGFloat(m.m11), b: CGFloat(m.m12),
@@ -225,7 +225,7 @@ extension CGAffineTransform {
 
 extension CATransform3D {
 
-    init(_ m: Matrix4) {
+    init(_ m: __Matrix4) {
 
         self.init(
             m11: CGFloat(m.m11), m12: CGFloat(m.m12), m13: CGFloat(m.m13), m14: CGFloat(m.m14),
@@ -238,7 +238,7 @@ extension CATransform3D {
 
 //MARK: VectorMath extensions
 
-extension Vector2 {
+extension __Vector2 {
 
     init(_ v: CGPoint) {
         self.init(x: Scalar(v.x), y: Scalar(v.y))
@@ -253,7 +253,7 @@ extension Vector2 {
     }
 }
 
-extension Matrix3 {
+extension __Matrix3 {
 
     init(_ m: CGAffineTransform) {
 
@@ -265,7 +265,7 @@ extension Matrix3 {
     }
 }
 
-extension Matrix4 {
+extension __Matrix4 {
 
     init(_ m: CATransform3D) {
 
