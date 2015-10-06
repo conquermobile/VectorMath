@@ -752,7 +752,7 @@ extension QuaternionType {
   func toAxisAngle<T: InstantiableVector4Type>() -> T {
     let xyzVector: Vector3 = xyz()
     let scale = xyzVector.length
-    if scale ~= 0 || scale ~= .TwoPi {
+    if scale ~= 0 || scale ~= .twoPi {
       return T(__x: 0, __y: 0, __z: 1, __w: 0)
     } else {
       return T(__x: __x / scale, __y: __y / scale, __z: __z / scale, __w: acos(__w) * 2)
@@ -1671,13 +1671,13 @@ extension Matrix4: InstantiableMatrix4Type {
 }
 
 extension Scalar {
-  static let Pi = Scalar(M_PI)
-  static let HalfPi = Scalar(M_PI_2)
-  static let QuarterPi = Scalar(M_PI_4)
-  static let TwoPi = Scalar(M_PI * 2)
-  static let DegreesPerRadian = 180 / Pi
-  static let RadiansPerDegree = Pi / 180
-  static let Epsilon: Scalar = 0.0001
+  static let pi = Scalar(M_PI)
+  static let halfPi = Scalar(M_PI_2)
+  static let quarterPi = Scalar(M_PI_4)
+  static let twoPi = Scalar(M_PI * 2)
+  static let degreesPerRadian = 180 / pi
+  static let radiansPerDegree = pi / 180
+  static let epsilon: Scalar = 0.0001
 }
 
 extension Vector2: Equatable, Hashable {
@@ -1893,7 +1893,7 @@ extension Matrix4: Equatable, Hashable {
 }
 
 func ~=(lhs: Scalar, rhs: Scalar) -> Bool {
-  return abs(lhs - rhs) < .Epsilon
+  return abs(lhs - rhs) < .epsilon
 }
 
 func ==(lhs: Vector2, rhs: Vector2) -> Bool {
