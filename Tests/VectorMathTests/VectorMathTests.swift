@@ -17,12 +17,12 @@ class Vector2Tests: XCTestCase {
         let b = Vector2(0, 1)
         let c = a.rotatedBy(.halfPi)
 
-        XCTAssertTrue(b ~= c)
+        XCTAssertTrue(b ~~= c)
 
         let d = Vector2(0.5, 1.5)
         let e = a.rotatedBy(.halfPi, around: Vector2(0, 0.5))
 
-        XCTAssertTrue(d ~= e)
+        XCTAssertTrue(d ~~= e)
     }
 
     func testAngleWith() {
@@ -31,7 +31,7 @@ class Vector2Tests: XCTestCase {
         let b = Vector2(0, 1)
         let angle = a.angleWith(b)
 
-        XCTAssertTrue(angle ~= .halfPi)
+        XCTAssertTrue(angle ~~= .halfPi)
     }
 }
 
@@ -43,7 +43,7 @@ class Matrix3Tests: XCTestCase {
         let matrix = Matrix3(transform)
         let compare = Matrix3(scale: Vector2(0.3, 0.4))
 
-        XCTAssertTrue(matrix ~= compare)
+        XCTAssertTrue(matrix ~~= compare)
     }
 
     func testTranslation() {
@@ -52,7 +52,7 @@ class Matrix3Tests: XCTestCase {
         let matrix = Matrix3(transform)
         let compare = Matrix3(translation: Vector2(0.3, 0.4))
 
-        XCTAssertTrue(matrix ~= compare)
+        XCTAssertTrue(matrix ~~= compare)
     }
 
     func testRotation() {
@@ -61,7 +61,7 @@ class Matrix3Tests: XCTestCase {
         let matrix = Matrix3(transform)
         let compare = Matrix3(rotation: .halfPi)
 
-        XCTAssertTrue(matrix ~= compare)
+        XCTAssertTrue(matrix ~~= compare)
     }
 
     func testMatrix3Multiplication() {
@@ -71,7 +71,7 @@ class Matrix3Tests: XCTestCase {
         let c = Matrix3(rotation: .halfPi + .quarterPi)
         let d = a * b
 
-        XCTAssertTrue(c ~= d)
+        XCTAssertTrue(c ~~= d)
     }
 
     func testVector3Multiplication() {
@@ -81,7 +81,7 @@ class Matrix3Tests: XCTestCase {
         let b = Vector3(0, 1, 1)
         let c = a * m
 
-        XCTAssertTrue(b ~= c)
+        XCTAssertTrue(b ~~= c)
     }
 
     func testVector2Multiplication() {
@@ -91,7 +91,7 @@ class Matrix3Tests: XCTestCase {
         let b = Vector2(0, 1)
         let c = a * m
 
-        XCTAssertTrue(b ~= c)
+        XCTAssertTrue(b ~~= c)
     }
 }
 
@@ -103,7 +103,7 @@ class Matrix4Tests: XCTestCase {
         let matrix = Matrix4(transform)
         let compare = Matrix4(scale: Vector3(0.3, 0.4, 0.5))
 
-        XCTAssertTrue(matrix ~= compare)
+        XCTAssertTrue(matrix ~~= compare)
     }
 
     func testTranslation() {
@@ -112,7 +112,7 @@ class Matrix4Tests: XCTestCase {
         let matrix = Matrix4(transform)
         let compare = Matrix4(translation: Vector3(0.3, 0.4, 0.5))
 
-        XCTAssertTrue(matrix ~= compare)
+        XCTAssertTrue(matrix ~~= compare)
     }
 
     func testRotation() {
@@ -121,7 +121,7 @@ class Matrix4Tests: XCTestCase {
         let matrix = Matrix4(transform)
         let compare = Matrix4(rotation: Vector4(1, 0, 0, .halfPi))
 
-        XCTAssertTrue(matrix ~= compare)
+        XCTAssertTrue(matrix ~~= compare)
     }
 
     func testRotationAndTranslation() {
@@ -134,7 +134,7 @@ class Matrix4Tests: XCTestCase {
         let result = euclideanTransformation * point;
         let expectedResult = Vector4(0.0, 0.0, 0.0, 1.0);
 
-        XCTAssertTrue(result ~= expectedResult);
+        XCTAssertTrue(result ~~= expectedResult);
     }
 
 
@@ -157,7 +157,7 @@ class Matrix4Tests: XCTestCase {
 
         let comparePoint = (xAxisTransformationMaxtrix90Positive * yAxisTransformationMaxtrix90Positive * zAxisTransformationMaxtrix90Positive) * somePoint;
 
-        XCTAssertTrue(resultPoint ~= comparePoint);
+        XCTAssertTrue(resultPoint ~~= comparePoint);
     }
 }
 
@@ -169,7 +169,7 @@ class QuaternionTests: XCTestCase {
         let q = Quaternion(axisAngle: aaa)
         let aab: Vector4 = q.toAxisAngle()
 
-        XCTAssertTrue(aaa ~= aab)
+        XCTAssertTrue(aaa ~~= aab)
     }
 
     func testVector3Multiplication() {
@@ -179,7 +179,7 @@ class QuaternionTests: XCTestCase {
         let b = Vector3(0, 1, 1)
         let c = a * q
 
-        XCTAssertTrue(b ~= c)
+        XCTAssertTrue(b ~~= c)
     }
 }
 

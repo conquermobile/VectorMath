@@ -162,7 +162,7 @@ extension Vector2Type {
   }
 
   func vector2IsApproxEqual(v: Vector2Type) -> Bool {
-    return __x ~= v.__x && __y ~= v.__y
+    return __x ~~= v.__x && __y ~~= v.__y
   }
 }
 
@@ -173,7 +173,7 @@ extension InstantiableVector2Type {
 
   func normalized() -> Self {
     let lengthSquared = self.lengthSquared
-    if lengthSquared ~= 0 || lengthSquared ~= 1 {
+    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
       return self
     }
     return self / sqrt(lengthSquared)
@@ -353,7 +353,7 @@ extension Vector3Type {
   }
 
   func vector3IsApproxEqual(v: Vector3Type) -> Bool {
-    return __x ~= v.__x && __y ~= v.__y && __z ~= v.__z
+    return __x ~~= v.__x && __y ~~= v.__y && __z ~~= v.__z
   }
 }
 
@@ -372,7 +372,7 @@ extension InstantiableVector3Type {
 
   func normalized() -> Self {
     let lengthSquared = self.lengthSquared
-    if lengthSquared ~= 0 || lengthSquared ~= 1 {
+    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
       return self
     }
     return self / sqrt(lengthSquared)
@@ -579,7 +579,7 @@ extension Vector4Type {
   }
 
   func vector4IsApproxEqual(v: Vector4Type) -> Bool {
-    return __x ~= v.__x && __y ~= v.__y && __z ~= v.__z && __w ~= v.__w
+    return __x ~~= v.__x && __y ~~= v.__y && __z ~~= v.__z && __w ~~= v.__w
   }
 }
 
@@ -590,7 +590,7 @@ extension InstantiableVector4Type {
 
   func normalized() -> Self {
     let lengthSquared = self.lengthSquared
-    if lengthSquared ~= 0 || lengthSquared ~= 1 {
+    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
       return self
     }
     return self / sqrt(lengthSquared)
@@ -752,7 +752,7 @@ extension QuaternionType {
   func toAxisAngle<T: InstantiableVector4Type>() -> T {
     let xyzVector: Vector3 = xyz()
     let scale = xyzVector.length
-    if scale ~= 0 || scale ~= .twoPi {
+    if scale ~~= 0 || scale ~~= .twoPi {
       return T(__x: 0, __y: 0, __z: 1, __w: 0)
     } else {
       return T(__x: __x / scale, __y: __y / scale, __z: __z / scale, __w: acos(__w) * 2)
@@ -771,7 +771,7 @@ extension QuaternionType {
 extension InstantiableQuaternionType {
   func interpolatedWith(q: QuaternionType, t: Scalar) -> Self {
     let dot = max(-1, min(1, self.dot(q)))
-    if dot ~= 1 {
+    if dot ~~= 1 {
       return (self + (q - self) * t).normalized()
     }
 
@@ -807,7 +807,7 @@ extension InstantiableQuaternionType {
 
   init(__rotationMatrix m: Matrix4Type) {
     let diagonal = m.__m11 + m.__m22 + m.__m33 + 1
-    if diagonal ~= 0 {
+    if diagonal ~~= 0 {
       let scale = sqrt(diagonal) * 2
       self.init(
         __x: (m.__m32 - m.__m23) / scale,
@@ -899,9 +899,9 @@ extension Matrix3Type {
 
   func matrix3IsApproxEqual(m: Matrix3Type) -> Bool {
     return
-      __m11 ~= m.__m11 && __m12 ~= m.__m12 && __m13 ~= m.__m13 &&
-      __m21 ~= m.__m21 && __m22 ~= m.__m22 && __m23 ~= m.__m23 &&
-      __m31 ~= m.__m31 && __m32 ~= m.__m32 && __m33 ~= m.__m33
+      __m11 ~~= m.__m11 && __m12 ~~= m.__m12 && __m13 ~~= m.__m13 &&
+      __m21 ~~= m.__m21 && __m22 ~~= m.__m22 && __m23 ~~= m.__m23 &&
+      __m31 ~~= m.__m31 && __m32 ~~= m.__m32 && __m33 ~~= m.__m33
   }
 }
 
@@ -1082,10 +1082,10 @@ extension Matrix4Type {
 
   func matrix4IsApproxEqual(m: Matrix4Type) -> Bool {
     return
-      __m11 ~= m.__m11 && __m12 ~= m.__m12 && __m13 ~= m.__m13 && __m14 ~= m.__m14 &&
-      __m21 ~= m.__m21 && __m22 ~= m.__m22 && __m23 ~= m.__m23 && __m24 ~= m.__m24 &&
-      __m31 ~= m.__m31 && __m32 ~= m.__m32 && __m33 ~= m.__m33 && __m34 ~= m.__m34 &&
-      __m41 ~= m.__m41 && __m42 ~= m.__m42 && __m43 ~= m.__m43 && __m44 ~= m.__m44
+      __m11 ~~= m.__m11 && __m12 ~~= m.__m12 && __m13 ~~= m.__m13 && __m14 ~~= m.__m14 &&
+      __m21 ~~= m.__m21 && __m22 ~~= m.__m22 && __m23 ~~= m.__m23 && __m24 ~~= m.__m24 &&
+      __m31 ~~= m.__m31 && __m32 ~~= m.__m32 && __m33 ~~= m.__m33 && __m34 ~~= m.__m34 &&
+      __m41 ~~= m.__m41 && __m42 ~~= m.__m42 && __m43 ~~= m.__m43 && __m44 ~~= m.__m44
   }
 }
 
@@ -1892,7 +1892,12 @@ extension Matrix4: Equatable, Hashable {
   }
 }
 
-func ~=(lhs: Scalar, rhs: Scalar) -> Bool {
+infix operator ~~= {
+  associativity none
+  precedence 130
+}
+
+func ~~=(lhs: Scalar, rhs: Scalar) -> Bool {
   return abs(lhs - rhs) < .epsilon
 }
 
@@ -1920,27 +1925,27 @@ func ==(lhs: Matrix4, rhs: Matrix4) -> Bool {
   return lhs.matrix4IsEqual(rhs)
 }
 
-func ~=(lhs: Vector2, rhs: Vector2) -> Bool {
+func ~~=(lhs: Vector2, rhs: Vector2) -> Bool {
   return lhs.vector2IsApproxEqual(rhs)
 }
 
-func ~=(lhs: Vector3, rhs: Vector3) -> Bool {
+func ~~=(lhs: Vector3, rhs: Vector3) -> Bool {
   return lhs.vector3IsApproxEqual(rhs)
 }
 
-func ~=(lhs: Vector4, rhs: Vector4) -> Bool {
+func ~~=(lhs: Vector4, rhs: Vector4) -> Bool {
   return lhs.vector4IsApproxEqual(rhs)
 }
 
-func ~=(lhs: Quaternion, rhs: Quaternion) -> Bool {
+func ~~=(lhs: Quaternion, rhs: Quaternion) -> Bool {
   return lhs.quaternionIsApproxEqual(rhs)
 }
 
-func ~=(lhs: Matrix3, rhs: Matrix3) -> Bool {
+func ~~=(lhs: Matrix3, rhs: Matrix3) -> Bool {
   return lhs.matrix3IsApproxEqual(rhs)
 }
 
-func ~=(lhs: Matrix4, rhs: Matrix4) -> Bool {
+func ~~=(lhs: Matrix4, rhs: Matrix4) -> Bool {
   return lhs.matrix4IsApproxEqual(rhs)
 }
 
