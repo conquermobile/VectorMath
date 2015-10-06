@@ -2,8 +2,8 @@
 //  VectorMathTests.swift
 //  VectorMathTests
 //
-//  Created by Nick Lockwood on 24/11/2014.
-//  Copyright (c) 2014 Nick Lockwood. All rights reserved.
+//  Created by Janne Raiskila, based on VectorMath created by Nick Lockwood
+//  on 24/11/2014. Copyright (c) 2014-2015 Nick Lockwood and Janne Raiskila
 //
 
 import QuartzCore

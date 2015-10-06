@@ -2,15 +2,15 @@
 //  VectorMath+SceneKit.swift
 //  VectorMath
 //
-//  Version 0.1
+//  Version 0.9
 //
-//  Created by Nick Lockwood on 24/11/2014.
-//  Copyright (c) 2014 Nick Lockwood. All rights reserved.
+//  Created by Janne Raiskila, based on VectorMath created by Nick Lockwood
+//  on 24/11/2014. Copyright (c) 2014-2015 Nick Lockwood and Janne Raiskila
 //
 //  Distributed under the permissive zlib License
 //  Get the latest version from here:
 //
-//  https://github.com/nicklockwood/VectorMath
+//  https://github.com/acdx/VectorMath
 //
 //  This software is provided 'as-is', without any express or implied
 //  warranty.  In no event will the authors be held liable for any damages
