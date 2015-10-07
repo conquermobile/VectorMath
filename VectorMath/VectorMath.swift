@@ -1681,7 +1681,7 @@ extension Scalar {
 }
 
 extension __Vector2: Equatable, Hashable {
-  static let Zero = __Vector2(0, 0)
+  static let zero = __Vector2(0, 0)
   static let X = __Vector2(1, 0)
   static let Y = __Vector2(0, 1)
 
@@ -1706,7 +1706,7 @@ extension __Vector2: Equatable, Hashable {
 }
 
 extension __Vector3: Equatable, Hashable {
-  static let Zero = __Vector3(0, 0, 0)
+  static let zero = __Vector3(0, 0, 0)
   static let X = __Vector3(1, 0, 0)
   static let Y = __Vector3(0, 1, 0)
   static let Z = __Vector3(0, 0, 1)
@@ -1733,7 +1733,7 @@ extension __Vector3: Equatable, Hashable {
 }
 
 extension __Vector4: Equatable, Hashable {
-  static let Zero = __Vector4(0, 0, 0, 0)
+  static let zero = __Vector4(0, 0, 0, 0)
   static let X = __Vector4(1, 0, 0, 0)
   static let Y = __Vector4(0, 1, 0, 0)
   static let Z = __Vector4(0, 0, 1, 0)
@@ -1762,8 +1762,8 @@ extension __Vector4: Equatable, Hashable {
 }
 
 extension __Quaternion: Equatable, Hashable {
-  static let Zero = __Quaternion(0, 0, 0, 0)
-  static let Identity = __Quaternion(0, 0, 0, 1)
+  static let zero = __Quaternion(0, 0, 0, 0)
+  static let identity = __Quaternion(0, 0, 0, 1)
 
   var hashValue: Int {
     return x.hashValue &+ y.hashValue &+ z.hashValue &+ w.hashValue
@@ -1788,7 +1788,7 @@ extension __Quaternion: Equatable, Hashable {
 }
 
 extension __Matrix3: Equatable, Hashable {
-  static let Identity = __Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1)
+  static let identity = __Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1)
 
   var hashValue: Int {
     var hash = m11.hashValue &+ m12.hashValue &+ m13.hashValue
@@ -1828,7 +1828,7 @@ extension __Matrix3: Equatable, Hashable {
 }
 
 extension __Matrix4: Equatable, Hashable {
-  static let Identity = __Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+  static let identity = __Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 
   var hashValue: Int {
     var hash = m11.hashValue &+ m12.hashValue &+ m13.hashValue &+ m14.hashValue
