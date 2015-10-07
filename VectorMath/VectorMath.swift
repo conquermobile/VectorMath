@@ -121,7 +121,7 @@ protocol InstantiableMatrix4Type: Matrix4Type {
   )
 }
 
-//MARK: Vector2
+//MARK: Extensions
 
 extension Vector2Type {
   var lengthSquared: Scalar {
@@ -166,159 +166,6 @@ extension Vector2Type {
   }
 }
 
-extension InstantiableVector2Type {
-  var inverse: Self {
-    return -self
-  }
-
-  func normalized() -> Self {
-    let lengthSquared = self.lengthSquared
-    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
-      return self
-    }
-    return self / sqrt(lengthSquared)
-  }
-
-  func rotatedBy(radians: Scalar) -> Self {
-    let cs = cos(radians)
-    let sn = sin(radians)
-    return Self(__x: __x * cs - __y * sn, __y: __x * sn + __y * cs)
-  }
-
-  func rotatedBy(radians: Scalar, around pivot: Vector2Type) -> Self {
-    return (self - pivot).rotatedBy(radians) + pivot
-  }
-
-  func interpolatedWith(v: Vector2Type, t: Scalar) -> Self {
-    return self + (v - self) * t
-  }
-}
-
-prefix func +<T: InstantiableVector2Type>(v: T) -> T {
-  return v
-}
-
-prefix func -<T: InstantiableVector2Type>(v: T) -> T {
-  return T(__x: -v.__x, __y: -v.__y)
-}
-
-func +<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
-}
-
-func +<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
-}
-
-func +<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
-}
-
-func -<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
-}
-
-func -<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
-}
-
-func -<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
-}
-
-func *<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
-}
-
-func *<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
-}
-
-func *<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
-}
-
-func *<T: InstantiableVector2Type>(lhs: Scalar, rhs: T) -> T {
-  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y)
-}
-
-func *<T: InstantiableVector2Type>(lhs: T, rhs: Scalar) -> T {
-  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs)
-}
-
-func *<T: InstantiableVector2Type>(lhs: T, rhs: Matrix3Type) -> T {
-  return T(
-    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + rhs.__m31,
-    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + rhs.__m32
-  )
-}
-
-func *<T: InstantiableVector2Type>(lhs: Matrix3Type, rhs: T) -> T {
-  return rhs * lhs
-}
-
-func /<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
-}
-
-func /<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
-}
-
-func /<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
-}
-
-func /<T: InstantiableVector2Type>(lhs: T, rhs: Scalar) -> T {
-  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs)
-}
-
-func +=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
-  lhs = lhs + rhs
-}
-
-func +=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
-  lhs = lhs + rhs
-}
-
-func -=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
-  lhs = lhs - rhs
-}
-
-func -=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
-  lhs = lhs - rhs
-}
-
-func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: Scalar) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: Matrix3Type) {
-  lhs = lhs * rhs
-}
-
-func /=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
-  lhs = lhs / rhs
-}
-
-func /=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
-  lhs = lhs / rhs
-}
-
-func /=<T: InstantiableVector2Type>(inout lhs: T, rhs: Scalar) {
-  lhs = lhs / rhs
-}
-
-//MARK: Vector3
-
 extension Vector3Type {
   var lengthSquared: Scalar {
     return __x * __x + __y * __y + __z * __z
@@ -356,190 +203,6 @@ extension Vector3Type {
     return __x ~~= v.__x && __y ~~= v.__y && __z ~~= v.__z
   }
 }
-
-extension InstantiableVector3Type {
-  var inverse: Self {
-    return -self
-  }
-
-  func cross(v: Vector3Type) -> Self {
-    return Self(
-      __x: __y * v.__z - __z * v.__y,
-      __y: __z * v.__x - __x * v.__z,
-      __z: __x * v.__y - __y * v.__x
-    )
-  }
-
-  func normalized() -> Self {
-    let lengthSquared = self.lengthSquared
-    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
-      return self
-    }
-    return self / sqrt(lengthSquared)
-  }
-
-  func interpolatedWith(v: Vector3Type, t: Scalar) -> Self {
-    return self + (v - self) * t
-  }
-}
-
-prefix func +<T: InstantiableVector3Type>(v: T) -> T {
-  return v
-}
-
-prefix func -<T: InstantiableVector3Type>(v: T) -> T {
-  return T(__x: -v.__x, __y: -v.__y, __z: -v.__z)
-}
-
-func +<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
-}
-
-func +<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
-}
-
-func +<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
-}
-
-func -<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
-}
-
-func -<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
-}
-
-func -<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
-}
-
-func *<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
-}
-
-func *<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
-}
-
-func *<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
-}
-
-func *<T: InstantiableVector3Type>(lhs: Scalar, rhs: T) -> T {
-  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y, __z: lhs * rhs.__z)
-}
-
-func *<T: InstantiableVector3Type>(lhs: T, rhs: Scalar) -> T {
-  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs, __z: lhs.__z * rhs)
-}
-
-func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix3Type) -> T {
-  return T(
-    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31,
-    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32,
-    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33
-  )
-}
-
-func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix4Type) -> T {
-  return T(
-    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31 + rhs.__m41,
-    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32 + rhs.__m42,
-    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33 + rhs.__m43
-  )
-}
-
-func *<T: InstantiableVector3Type>(lhs: Matrix3Type, rhs: T) -> T {
-  return rhs * lhs
-}
-
-func *<T: InstantiableVector3Type>(lhs: Matrix4Type, rhs: T) -> T {
-  return rhs * lhs
-}
-
-func *<T: InstantiableVector3Type>(v: T, q: QuaternionType) -> T {
-  let qv: __Vector3 = q.xyz()
-  let uv = qv.cross(v)
-  let uuv = qv.cross(uv)
-  let sub = uv * 2 * q.__w
-  return v + sub + (uuv * 2)
-}
-
-func *<T: InstantiableVector3Type>(lhs: QuaternionType, rhs: T) -> T {
-  return rhs * lhs
-}
-
-func /<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
-}
-
-func /<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
-}
-
-func /<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
-}
-
-func /<T: InstantiableVector3Type>(lhs: T, rhs: Scalar) -> T {
-  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs, __z: lhs.__z / rhs)
-}
-
-func +=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
-  lhs = lhs + rhs
-}
-
-func +=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
-  lhs = lhs + rhs
-}
-
-func -=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
-  lhs = lhs - rhs
-}
-
-func -=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
-  lhs = lhs - rhs
-}
-
-func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Scalar) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Matrix3Type) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Matrix4Type) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: QuaternionType) {
-  lhs = lhs * rhs
-}
-
-func /=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
-  lhs = lhs / rhs
-}
-
-func /=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
-  lhs = lhs / rhs
-}
-
-func /=<T: InstantiableVector3Type>(inout lhs: T, rhs: Scalar) {
-  lhs = lhs / rhs
-}
-
-//MARK: Vector4
 
 extension Vector4Type {
   var lengthSquared: Scalar {
@@ -583,155 +246,6 @@ extension Vector4Type {
   }
 }
 
-extension InstantiableVector4Type {
-  var inverse: Self {
-    return -self
-  }
-
-  func normalized() -> Self {
-    let lengthSquared = self.lengthSquared
-    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
-      return self
-    }
-    return self / sqrt(lengthSquared)
-  }
-
-  func interpolatedWith(v: Vector4Type, t: Scalar) -> Self {
-    return self + (v - self) * t
-  }
-}
-
-prefix func +<T: InstantiableVector4Type>(v: T) -> T {
-  return v
-}
-
-prefix func -<T: InstantiableVector4Type>(v: T) -> T {
-  return T(__x: -v.__x, __y: -v.__y, __z: -v.__z, __w: -v.__w)
-}
-
-func +<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
-}
-
-func +<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
-}
-
-func +<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
-}
-
-func -<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
-}
-
-func -<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
-}
-
-func -<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
-}
-
-func *<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
-}
-
-func *<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
-}
-
-func *<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
-}
-
-func *<T: InstantiableVector4Type>(lhs: Scalar, rhs: T) -> T {
-  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y, __z: lhs * rhs.__z, __w: lhs * rhs.__w)
-}
-
-func *<T: InstantiableVector4Type>(lhs: T, rhs: Scalar) -> T {
-  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs, __z: lhs.__z * rhs, __w: lhs.__w * rhs)
-}
-
-func *<T: InstantiableVector4Type>(lhs: T, rhs: Matrix4Type) -> T {
-  return T(
-    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31 + lhs.__w * rhs.__m41,
-    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32 + lhs.__w * rhs.__m42,
-    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33 + lhs.__w * rhs.__m43,
-    __w: lhs.__x * rhs.__m14 + lhs.__y * rhs.__m24 + lhs.__z * rhs.__m34 + lhs.__w * rhs.__m44
-  )
-}
-
-func *<T: InstantiableVector4Type>(lhs: Matrix4Type, rhs: T) -> T {
-  return rhs * lhs
-}
-
-func /<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
-}
-
-func /<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
-}
-
-func /<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
-  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
-}
-
-func /<T: InstantiableVector4Type>(lhs: T, rhs: Scalar) -> T {
-  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs, __z: lhs.__z / rhs, __w: lhs.__w / rhs)
-}
-
-func +=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
-  lhs = lhs + rhs
-}
-
-func +=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
-  lhs = lhs + rhs
-}
-
-func -=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
-  lhs = lhs - rhs
-}
-
-func -=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
-  lhs = lhs - rhs
-}
-
-func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: Scalar) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: Matrix4Type) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: QuaternionType) {
-  lhs = lhs * rhs
-}
-
-func /=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
-  lhs = lhs / rhs
-}
-
-func /=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
-  lhs = lhs / rhs
-}
-
-func /=<T: InstantiableVector4Type>(inout lhs: T, rhs: Scalar) {
-  lhs = lhs / rhs
-}
-
-//MARK: Quaternion
-
 extension QuaternionType {
   var pitch: Scalar {
     return atan2(2 * (__y * __z + __w * __x), __w * __w - __x * __x - __y * __y + __z * __z)
@@ -765,6 +279,139 @@ extension QuaternionType {
 
   func quaternionIsApproxEqual(v: QuaternionType) -> Bool {
     return vector4IsApproxEqual(v)
+  }
+}
+
+extension Matrix3Type {
+  func toArray() -> [Scalar] {
+    return [__m11, __m12, __m13, __m21, __m22, __m23, __m31, __m32, __m33]
+  }
+
+  var determinant: Scalar {
+    return (__m11 * __m22 * __m33 + __m12 * __m23 * __m31 + __m13 * __m21 * __m32)
+      - (__m13 * __m22 * __m31 + __m11 * __m23 * __m32 + __m12 * __m21 * __m33)
+  }
+
+  func matrix3IsEqual(m: Matrix3Type) -> Bool {
+    return
+      __m11 == m.__m11 && __m12 == m.__m12 && __m13 == m.__m13 &&
+      __m21 == m.__m21 && __m22 == m.__m22 && __m23 == m.__m23 &&
+      __m31 == m.__m31 && __m32 == m.__m32 && __m33 == m.__m33
+  }
+
+  func matrix3IsApproxEqual(m: Matrix3Type) -> Bool {
+    return
+      __m11 ~~= m.__m11 && __m12 ~~= m.__m12 && __m13 ~~= m.__m13 &&
+      __m21 ~~= m.__m21 && __m22 ~~= m.__m22 && __m23 ~~= m.__m23 &&
+      __m31 ~~= m.__m31 && __m32 ~~= m.__m32 && __m33 ~~= m.__m33
+  }
+}
+
+extension Matrix4Type {
+  func toArray() -> [Scalar] {
+    return [
+      __m11, __m12, __m13, __m14,
+      __m21, __m22, __m23, __m24,
+      __m31, __m32, __m33, __m34,
+      __m41, __m42, __m43, __m44
+    ]
+  }
+
+  private func determinantForAdjugate(m: Matrix4Type) -> Scalar {
+    return __m11 * m.__m11 + __m12 * m.__m21 + __m13 * m.__m31 + __m14 * m.__m41
+  }
+
+  var determinant: Scalar {
+    let copy = __Matrix4(self)
+    return determinantForAdjugate(copy.adjugate)
+  }
+
+  func matrix4IsEqual(m: Matrix4Type) -> Bool {
+    return
+      __m11 == m.__m11 && __m12 == m.__m12 && __m13 == m.__m13 && __m14 == m.__m14 &&
+      __m21 == m.__m21 && __m22 == m.__m22 && __m23 == m.__m23 && __m24 == m.__m24 &&
+      __m31 == m.__m31 && __m32 == m.__m32 && __m33 == m.__m33 && __m34 == m.__m34 &&
+      __m41 == m.__m41 && __m42 == m.__m42 && __m43 == m.__m43 && __m44 == m.__m44
+  }
+
+  func matrix4IsApproxEqual(m: Matrix4Type) -> Bool {
+    return
+      __m11 ~~= m.__m11 && __m12 ~~= m.__m12 && __m13 ~~= m.__m13 && __m14 ~~= m.__m14 &&
+      __m21 ~~= m.__m21 && __m22 ~~= m.__m22 && __m23 ~~= m.__m23 && __m24 ~~= m.__m24 &&
+      __m31 ~~= m.__m31 && __m32 ~~= m.__m32 && __m33 ~~= m.__m33 && __m34 ~~= m.__m34 &&
+      __m41 ~~= m.__m41 && __m42 ~~= m.__m42 && __m43 ~~= m.__m43 && __m44 ~~= m.__m44
+  }
+}
+
+extension InstantiableVector2Type {
+  var inverse: Self {
+    return -self
+  }
+
+  func normalized() -> Self {
+    let lengthSquared = self.lengthSquared
+    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
+      return self
+    }
+    return self / sqrt(lengthSquared)
+  }
+
+  func rotatedBy(radians: Scalar) -> Self {
+    let cs = cos(radians)
+    let sn = sin(radians)
+    return Self(__x: __x * cs - __y * sn, __y: __x * sn + __y * cs)
+  }
+
+  func rotatedBy(radians: Scalar, around pivot: Vector2Type) -> Self {
+    return (self - pivot).rotatedBy(radians) + pivot
+  }
+
+  func interpolatedWith(v: Vector2Type, t: Scalar) -> Self {
+    return self + (v - self) * t
+  }
+}
+
+extension InstantiableVector3Type {
+  var inverse: Self {
+    return -self
+  }
+
+  func cross(v: Vector3Type) -> Self {
+    return Self(
+      __x: __y * v.__z - __z * v.__y,
+      __y: __z * v.__x - __x * v.__z,
+      __z: __x * v.__y - __y * v.__x
+    )
+  }
+
+  func normalized() -> Self {
+    let lengthSquared = self.lengthSquared
+    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
+      return self
+    }
+    return self / sqrt(lengthSquared)
+  }
+
+  func interpolatedWith(v: Vector3Type, t: Scalar) -> Self {
+    return self + (v - self) * t
+  }
+}
+
+extension InstantiableVector4Type {
+  var inverse: Self {
+    return -self
+  }
+
+  func normalized() -> Self {
+    let lengthSquared = self.lengthSquared
+    if lengthSquared ~~= 0 || lengthSquared ~~= 1 {
+      return self
+    }
+    return self / sqrt(lengthSquared)
+  }
+
+  func interpolatedWith(v: Vector4Type, t: Scalar) -> Self {
+    return self + (v - self) * t
   }
 }
 
@@ -843,68 +490,6 @@ extension InstantiableQuaternionType {
   }
 }
 
-func *<T: InstantiableQuaternionType>(lhs: T, rhs: T) -> T {
-  return T(
-    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
-    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
-    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
-    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
-  )
-}
-
-func *<T: InstantiableQuaternionType>(lhs: T, rhs: QuaternionType) -> T {
-  return T(
-    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
-    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
-    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
-    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
-  )
-}
-
-func *<T: InstantiableQuaternionType>(lhs: QuaternionType, rhs: T) -> T {
-  return T(
-    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
-    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
-    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
-    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
-  )
-}
-
-func *=<T: InstantiableQuaternionType>(inout lhs: T, rhs: T) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableQuaternionType>(inout lhs: T, rhs: QuaternionType) {
-  lhs = lhs * rhs
-}
-
-//MARK: Matrix3
-
-extension Matrix3Type {
-  func toArray() -> [Scalar] {
-    return [__m11, __m12, __m13, __m21, __m22, __m23, __m31, __m32, __m33]
-  }
-
-  var determinant: Scalar {
-    return (__m11 * __m22 * __m33 + __m12 * __m23 * __m31 + __m13 * __m21 * __m32)
-      - (__m13 * __m22 * __m31 + __m11 * __m23 * __m32 + __m12 * __m21 * __m33)
-  }
-
-  func matrix3IsEqual(m: Matrix3Type) -> Bool {
-    return
-      __m11 == m.__m11 && __m12 == m.__m12 && __m13 == m.__m13 &&
-      __m21 == m.__m21 && __m22 == m.__m22 && __m23 == m.__m23 &&
-      __m31 == m.__m31 && __m32 == m.__m32 && __m33 == m.__m33
-  }
-
-  func matrix3IsApproxEqual(m: Matrix3Type) -> Bool {
-    return
-      __m11 ~~= m.__m11 && __m12 ~~= m.__m12 && __m13 ~~= m.__m13 &&
-      __m21 ~~= m.__m21 && __m22 ~~= m.__m22 && __m23 ~~= m.__m23 &&
-      __m31 ~~= m.__m31 && __m32 ~~= m.__m32 && __m33 ~~= m.__m33
-  }
-}
-
 extension InstantiableMatrix3Type {
   var adjugate: Self {
     return Self(
@@ -970,122 +555,6 @@ extension InstantiableMatrix3Type {
       __m21: -sn, __m22: cs, __m23: 0,
       __m31: 0, __m32: 0, __m33: 1
     )
-  }
-}
-
-prefix func +<T: InstantiableMatrix3Type>(m: T) -> T {
-  return m
-}
-
-prefix func -<T: InstantiableMatrix3Type>(m: T) -> T {
-  return m.inverse
-}
-
-func *<T: InstantiableMatrix3Type>(lhs: T, rhs: T) -> T {
-  return T(
-    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
-    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
-    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
-    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
-    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
-    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
-    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
-    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
-    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
-  )
-}
-
-func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Matrix3Type) -> T {
-  return T(
-    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
-    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
-    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
-    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
-    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
-    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
-    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
-    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
-    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
-  )
-}
-
-func *<T: InstantiableMatrix3Type>(lhs: Matrix3Type, rhs: T) -> T {
-  return T(
-    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
-    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
-    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
-    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
-    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
-    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
-    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
-    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
-    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
-  )
-}
-
-func *<T: InstantiableMatrix3Type>(lhs: Scalar, rhs: T) -> T {
-  return T(
-    __m11: lhs * rhs.__m11, __m12: lhs * rhs.__m12, __m13: lhs * rhs.__m13,
-    __m21: lhs * rhs.__m21, __m22: lhs * rhs.__m22, __m23: lhs * rhs.__m23,
-    __m31: lhs * rhs.__m31, __m32: lhs * rhs.__m32, __m33: lhs * rhs.__m33
-  )
-}
-
-func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Scalar) -> T {
-  return T(
-    __m11: lhs.__m11 * rhs, __m12: lhs.__m12 * rhs, __m13: lhs.__m13 * rhs,
-    __m21: lhs.__m21 * rhs, __m22: lhs.__m22 * rhs, __m23: lhs.__m23 * rhs,
-    __m31: lhs.__m31 * rhs, __m32: lhs.__m32 * rhs, __m33: lhs.__m33 * rhs
-  )
-}
-
-func *=<T: InstantiableMatrix3Type>(inout lhs: T, rhs: T) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableMatrix3Type>(inout lhs: T, rhs: Matrix3Type) {
-  lhs = lhs * rhs
-}
-
-func *=<T: InstantiableMatrix3Type>(inout lhs: T, rhs: Scalar) {
-  lhs = lhs * rhs
-}
-
-//MARK: Matrix4
-
-extension Matrix4Type {
-  func toArray() -> [Scalar] {
-    return [
-      __m11, __m12, __m13, __m14,
-      __m21, __m22, __m23, __m24,
-      __m31, __m32, __m33, __m34,
-      __m41, __m42, __m43, __m44
-    ]
-  }
-
-  private func determinantForAdjugate(m: Matrix4Type) -> Scalar {
-    return __m11 * m.__m11 + __m12 * m.__m21 + __m13 * m.__m31 + __m14 * m.__m41
-  }
-
-  var determinant: Scalar {
-    let copy = __Matrix4(self)
-    return determinantForAdjugate(copy.adjugate)
-  }
-
-  func matrix4IsEqual(m: Matrix4Type) -> Bool {
-    return
-      __m11 == m.__m11 && __m12 == m.__m12 && __m13 == m.__m13 && __m14 == m.__m14 &&
-      __m21 == m.__m21 && __m22 == m.__m22 && __m23 == m.__m23 && __m24 == m.__m24 &&
-      __m31 == m.__m31 && __m32 == m.__m32 && __m33 == m.__m33 && __m34 == m.__m34 &&
-      __m41 == m.__m41 && __m42 == m.__m42 && __m43 == m.__m43 && __m44 == m.__m44
-  }
-
-  func matrix4IsApproxEqual(m: Matrix4Type) -> Bool {
-    return
-      __m11 ~~= m.__m11 && __m12 ~~= m.__m12 && __m13 ~~= m.__m13 && __m14 ~~= m.__m14 &&
-      __m21 ~~= m.__m21 && __m22 ~~= m.__m22 && __m23 ~~= m.__m23 && __m24 ~~= m.__m24 &&
-      __m31 ~~= m.__m31 && __m32 ~~= m.__m32 && __m33 ~~= m.__m33 && __m34 ~~= m.__m34 &&
-      __m41 ~~= m.__m41 && __m42 ~~= m.__m42 && __m43 ~~= m.__m43 && __m44 ~~= m.__m44
   }
 }
 
@@ -1251,6 +720,539 @@ extension InstantiableMatrix4Type {
     )
   }
 }
+
+//MARK: Vector2 operators
+
+prefix func +<T: InstantiableVector2Type>(v: T) -> T {
+  return v
+}
+
+prefix func -<T: InstantiableVector2Type>(v: T) -> T {
+  return T(__x: -v.__x, __y: -v.__y)
+}
+
+func +<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
+}
+
+func +<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
+}
+
+func +<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y)
+}
+
+func -<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
+}
+
+func -<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
+}
+
+func -<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y)
+}
+
+func *<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
+}
+
+func *<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
+}
+
+func *<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y)
+}
+
+func *<T: InstantiableVector2Type>(lhs: Scalar, rhs: T) -> T {
+  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y)
+}
+
+func *<T: InstantiableVector2Type>(lhs: T, rhs: Scalar) -> T {
+  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs)
+}
+
+func *<T: InstantiableVector2Type>(lhs: T, rhs: Matrix3Type) -> T {
+  return T(
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + rhs.__m31,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + rhs.__m32
+  )
+}
+
+func *<T: InstantiableVector2Type>(lhs: Matrix3Type, rhs: T) -> T {
+  return rhs * lhs
+}
+
+func /<T: InstantiableVector2Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
+}
+
+func /<T: InstantiableVector2Type>(lhs: T, rhs: Vector2Type) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
+}
+
+func /<T: InstantiableVector2Type>(lhs: Vector2Type, rhs: T) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y)
+}
+
+func /<T: InstantiableVector2Type>(lhs: T, rhs: Scalar) -> T {
+  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs)
+}
+
+func +=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
+  lhs = lhs + rhs
+}
+
+func +=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
+  lhs = lhs + rhs
+}
+
+func -=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
+  lhs = lhs - rhs
+}
+
+func -=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
+  lhs = lhs - rhs
+}
+
+func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: Scalar) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector2Type>(inout lhs: T, rhs: Matrix3Type) {
+  lhs = lhs * rhs
+}
+
+func /=<T: InstantiableVector2Type>(inout lhs: T, rhs: T) {
+  lhs = lhs / rhs
+}
+
+func /=<T: InstantiableVector2Type>(inout lhs: T, rhs: Vector2Type) {
+  lhs = lhs / rhs
+}
+
+func /=<T: InstantiableVector2Type>(inout lhs: T, rhs: Scalar) {
+  lhs = lhs / rhs
+}
+
+//MARK: Vector3 operators
+
+prefix func +<T: InstantiableVector3Type>(v: T) -> T {
+  return v
+}
+
+prefix func -<T: InstantiableVector3Type>(v: T) -> T {
+  return T(__x: -v.__x, __y: -v.__y, __z: -v.__z)
+}
+
+func +<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
+}
+
+func +<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
+}
+
+func +<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z)
+}
+
+func -<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
+}
+
+func -<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
+}
+
+func -<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z)
+}
+
+func *<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
+}
+
+func *<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
+}
+
+func *<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z)
+}
+
+func *<T: InstantiableVector3Type>(lhs: Scalar, rhs: T) -> T {
+  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y, __z: lhs * rhs.__z)
+}
+
+func *<T: InstantiableVector3Type>(lhs: T, rhs: Scalar) -> T {
+  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs, __z: lhs.__z * rhs)
+}
+
+func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix3Type) -> T {
+  return T(
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32,
+    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33
+  )
+}
+
+func *<T: InstantiableVector3Type>(lhs: T, rhs: Matrix4Type) -> T {
+  return T(
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31 + rhs.__m41,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32 + rhs.__m42,
+    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33 + rhs.__m43
+  )
+}
+
+func *<T: InstantiableVector3Type>(lhs: Matrix3Type, rhs: T) -> T {
+  return rhs * lhs
+}
+
+func *<T: InstantiableVector3Type>(lhs: Matrix4Type, rhs: T) -> T {
+  return rhs * lhs
+}
+
+func *<T: InstantiableVector3Type>(v: T, q: QuaternionType) -> T {
+  let qv: __Vector3 = q.xyz()
+  let uv = qv.cross(v)
+  let uuv = qv.cross(uv)
+  let sub = uv * 2 * q.__w
+  return v + sub + (uuv * 2)
+}
+
+func *<T: InstantiableVector3Type>(lhs: QuaternionType, rhs: T) -> T {
+  return rhs * lhs
+}
+
+func /<T: InstantiableVector3Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
+}
+
+func /<T: InstantiableVector3Type>(lhs: T, rhs: Vector3Type) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
+}
+
+func /<T: InstantiableVector3Type>(lhs: Vector3Type, rhs: T) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z)
+}
+
+func /<T: InstantiableVector3Type>(lhs: T, rhs: Scalar) -> T {
+  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs, __z: lhs.__z / rhs)
+}
+
+func +=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
+  lhs = lhs + rhs
+}
+
+func +=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
+  lhs = lhs + rhs
+}
+
+func -=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
+  lhs = lhs - rhs
+}
+
+func -=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
+  lhs = lhs - rhs
+}
+
+func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Scalar) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Matrix3Type) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: Matrix4Type) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector3Type>(inout lhs: T, rhs: QuaternionType) {
+  lhs = lhs * rhs
+}
+
+func /=<T: InstantiableVector3Type>(inout lhs: T, rhs: T) {
+  lhs = lhs / rhs
+}
+
+func /=<T: InstantiableVector3Type>(inout lhs: T, rhs: Vector3Type) {
+  lhs = lhs / rhs
+}
+
+func /=<T: InstantiableVector3Type>(inout lhs: T, rhs: Scalar) {
+  lhs = lhs / rhs
+}
+
+//MARK: Vector4 operators
+
+prefix func +<T: InstantiableVector4Type>(v: T) -> T {
+  return v
+}
+
+prefix func -<T: InstantiableVector4Type>(v: T) -> T {
+  return T(__x: -v.__x, __y: -v.__y, __z: -v.__z, __w: -v.__w)
+}
+
+func +<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
+}
+
+func +<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
+}
+
+func +<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
+  return T(__x: lhs.__x + rhs.__x, __y: lhs.__y + rhs.__y, __z: lhs.__z + rhs.__z, __w: lhs.__w + rhs.__w)
+}
+
+func -<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
+}
+
+func -<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
+}
+
+func -<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
+  return T(__x: lhs.__x - rhs.__x, __y: lhs.__y - rhs.__y, __z: lhs.__z - rhs.__z, __w: lhs.__w - rhs.__w)
+}
+
+func *<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
+}
+
+func *<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
+}
+
+func *<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
+  return T(__x: lhs.__x * rhs.__x, __y: lhs.__y * rhs.__y, __z: lhs.__z * rhs.__z, __w: lhs.__w * rhs.__w)
+}
+
+func *<T: InstantiableVector4Type>(lhs: Scalar, rhs: T) -> T {
+  return T(__x: lhs * rhs.__x, __y: lhs * rhs.__y, __z: lhs * rhs.__z, __w: lhs * rhs.__w)
+}
+
+func *<T: InstantiableVector4Type>(lhs: T, rhs: Scalar) -> T {
+  return T(__x: lhs.__x * rhs, __y: lhs.__y * rhs, __z: lhs.__z * rhs, __w: lhs.__w * rhs)
+}
+
+func *<T: InstantiableVector4Type>(lhs: T, rhs: Matrix4Type) -> T {
+  return T(
+    __x: lhs.__x * rhs.__m11 + lhs.__y * rhs.__m21 + lhs.__z * rhs.__m31 + lhs.__w * rhs.__m41,
+    __y: lhs.__x * rhs.__m12 + lhs.__y * rhs.__m22 + lhs.__z * rhs.__m32 + lhs.__w * rhs.__m42,
+    __z: lhs.__x * rhs.__m13 + lhs.__y * rhs.__m23 + lhs.__z * rhs.__m33 + lhs.__w * rhs.__m43,
+    __w: lhs.__x * rhs.__m14 + lhs.__y * rhs.__m24 + lhs.__z * rhs.__m34 + lhs.__w * rhs.__m44
+  )
+}
+
+func *<T: InstantiableVector4Type>(lhs: Matrix4Type, rhs: T) -> T {
+  return rhs * lhs
+}
+
+func /<T: InstantiableVector4Type>(lhs: T, rhs: T) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
+}
+
+func /<T: InstantiableVector4Type>(lhs: T, rhs: Vector4Type) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
+}
+
+func /<T: InstantiableVector4Type>(lhs: Vector4Type, rhs: T) -> T {
+  return T(__x: lhs.__x / rhs.__x, __y: lhs.__y / rhs.__y, __z: lhs.__z / rhs.__z, __w: lhs.__w / rhs.__w)
+}
+
+func /<T: InstantiableVector4Type>(lhs: T, rhs: Scalar) -> T {
+  return T(__x: lhs.__x / rhs, __y: lhs.__y / rhs, __z: lhs.__z / rhs, __w: lhs.__w / rhs)
+}
+
+func +=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
+  lhs = lhs + rhs
+}
+
+func +=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
+  lhs = lhs + rhs
+}
+
+func -=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
+  lhs = lhs - rhs
+}
+
+func -=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
+  lhs = lhs - rhs
+}
+
+func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: Scalar) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: Matrix4Type) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableVector4Type>(inout lhs: T, rhs: QuaternionType) {
+  lhs = lhs * rhs
+}
+
+func /=<T: InstantiableVector4Type>(inout lhs: T, rhs: T) {
+  lhs = lhs / rhs
+}
+
+func /=<T: InstantiableVector4Type>(inout lhs: T, rhs: Vector4Type) {
+  lhs = lhs / rhs
+}
+
+func /=<T: InstantiableVector4Type>(inout lhs: T, rhs: Scalar) {
+  lhs = lhs / rhs
+}
+
+//MARK: Quaternion operators
+
+func *<T: InstantiableQuaternionType>(lhs: T, rhs: T) -> T {
+  return T(
+    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
+    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
+    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
+    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
+  )
+}
+
+func *<T: InstantiableQuaternionType>(lhs: T, rhs: QuaternionType) -> T {
+  return T(
+    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
+    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
+    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
+    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
+  )
+}
+
+func *<T: InstantiableQuaternionType>(lhs: QuaternionType, rhs: T) -> T {
+  return T(
+    __x: lhs.__w * rhs.__x + lhs.__x * rhs.__w + lhs.__y * rhs.__z - lhs.__z * rhs.__y,
+    __y: lhs.__w * rhs.__y + lhs.__y * rhs.__w + lhs.__z * rhs.__x - lhs.__x * rhs.__z,
+    __z: lhs.__w * rhs.__z + lhs.__z * rhs.__w + lhs.__x * rhs.__y - lhs.__y * rhs.__x,
+    __w: lhs.__w * rhs.__w - lhs.__x * rhs.__x - lhs.__y * rhs.__y - lhs.__z * rhs.__z
+  )
+}
+
+func *=<T: InstantiableQuaternionType>(inout lhs: T, rhs: T) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableQuaternionType>(inout lhs: T, rhs: QuaternionType) {
+  lhs = lhs * rhs
+}
+
+//MARK: Matrix3 operators
+
+prefix func +<T: InstantiableMatrix3Type>(m: T) -> T {
+  return m
+}
+
+prefix func -<T: InstantiableMatrix3Type>(m: T) -> T {
+  return m.inverse
+}
+
+func *<T: InstantiableMatrix3Type>(lhs: T, rhs: T) -> T {
+  return T(
+    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
+    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
+    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
+    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
+    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
+    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
+    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
+    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
+    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
+  )
+}
+
+func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Matrix3Type) -> T {
+  return T(
+    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
+    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
+    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
+    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
+    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
+    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
+    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
+    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
+    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
+  )
+}
+
+func *<T: InstantiableMatrix3Type>(lhs: Matrix3Type, rhs: T) -> T {
+  return T(
+    __m11: lhs.__m11 * rhs.__m11 + lhs.__m21 * rhs.__m12 + lhs.__m31 * rhs.__m13,
+    __m12: lhs.__m12 * rhs.__m11 + lhs.__m22 * rhs.__m12 + lhs.__m32 * rhs.__m13,
+    __m13: lhs.__m13 * rhs.__m11 + lhs.__m23 * rhs.__m12 + lhs.__m33 * rhs.__m13,
+    __m21: lhs.__m11 * rhs.__m21 + lhs.__m21 * rhs.__m22 + lhs.__m31 * rhs.__m23,
+    __m22: lhs.__m12 * rhs.__m21 + lhs.__m22 * rhs.__m22 + lhs.__m32 * rhs.__m23,
+    __m23: lhs.__m13 * rhs.__m21 + lhs.__m23 * rhs.__m22 + lhs.__m33 * rhs.__m23,
+    __m31: lhs.__m11 * rhs.__m31 + lhs.__m21 * rhs.__m32 + lhs.__m31 * rhs.__m33,
+    __m32: lhs.__m12 * rhs.__m31 + lhs.__m22 * rhs.__m32 + lhs.__m32 * rhs.__m33,
+    __m33: lhs.__m13 * rhs.__m31 + lhs.__m23 * rhs.__m32 + lhs.__m33 * rhs.__m33
+  )
+}
+
+func *<T: InstantiableMatrix3Type>(lhs: Scalar, rhs: T) -> T {
+  return T(
+    __m11: lhs * rhs.__m11, __m12: lhs * rhs.__m12, __m13: lhs * rhs.__m13,
+    __m21: lhs * rhs.__m21, __m22: lhs * rhs.__m22, __m23: lhs * rhs.__m23,
+    __m31: lhs * rhs.__m31, __m32: lhs * rhs.__m32, __m33: lhs * rhs.__m33
+  )
+}
+
+func *<T: InstantiableMatrix3Type>(lhs: T, rhs: Scalar) -> T {
+  return T(
+    __m11: lhs.__m11 * rhs, __m12: lhs.__m12 * rhs, __m13: lhs.__m13 * rhs,
+    __m21: lhs.__m21 * rhs, __m22: lhs.__m22 * rhs, __m23: lhs.__m23 * rhs,
+    __m31: lhs.__m31 * rhs, __m32: lhs.__m32 * rhs, __m33: lhs.__m33 * rhs
+  )
+}
+
+func *=<T: InstantiableMatrix3Type>(inout lhs: T, rhs: T) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableMatrix3Type>(inout lhs: T, rhs: Matrix3Type) {
+  lhs = lhs * rhs
+}
+
+func *=<T: InstantiableMatrix3Type>(inout lhs: T, rhs: Scalar) {
+  lhs = lhs * rhs
+}
+
+//MARK: Matrix4 operators
 
 prefix func +<T: InstantiableMatrix4Type>(m: T) -> T {
   return m
@@ -1892,6 +1894,8 @@ extension __Matrix4: Equatable, Hashable {
   }
 }
 
+//MARK: Concrete type operators
+
 infix operator ~~= {
   associativity none
   precedence 130
@@ -1948,4 +1952,3 @@ func ~~=(lhs: __Matrix3, rhs: __Matrix3) -> Bool {
 func ~~=(lhs: __Matrix4, rhs: __Matrix4) -> Bool {
   return lhs.matrix4IsApproxEqual(rhs)
 }
-
