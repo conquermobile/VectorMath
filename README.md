@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nicklockwood/VectorMath.svg)](https://travis-ci.org/nicklockwood/VectorMath)
+[![Build Status](https://travis-ci.org/acdx/VectorMath.svg)](https://travis-ci.org/acdx/VectorMath)
 
 
 Purpose

@@ -11,6 +11,7 @@
 		01B6A6641A23F08000DA8FB3 /* VectorMath+SceneKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6A6611A23F08000DA8FB3 /* VectorMath+SceneKit.swift */; };
 		01B6A6651A23F08000DA8FB3 /* VectorMath+Quartz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6A6621A23F08000DA8FB3 /* VectorMath+Quartz.swift */; };
 		01B6A6661A23F08000DA8FB3 /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6A6631A23F08000DA8FB3 /* VectorMath.swift */; };
+		FB570EF91BC49CFC00D082C8 /* VectorMath+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB570EF81BC49CFC00D082C8 /* VectorMath+Types.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		01B6A6611A23F08000DA8FB3 /* VectorMath+SceneKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VectorMath+SceneKit.swift"; sourceTree = "<group>"; };
 		01B6A6621A23F08000DA8FB3 /* VectorMath+Quartz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VectorMath+Quartz.swift"; sourceTree = "<group>"; };
 		01B6A6631A23F08000DA8FB3 /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
+		FB570EF81BC49CFC00D082C8 /* VectorMath+Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VectorMath+Types.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,9 +72,10 @@
 		01B6A6601A23F08000DA8FB3 /* VectorMath */ = {
 			isa = PBXGroup;
 			children = (
+				01B6A6631A23F08000DA8FB3 /* VectorMath.swift */,
+				FB570EF81BC49CFC00D082C8 /* VectorMath+Types.swift */,
 				01B6A6611A23F08000DA8FB3 /* VectorMath+SceneKit.swift */,
 				01B6A6621A23F08000DA8FB3 /* VectorMath+Quartz.swift */,
-				01B6A6631A23F08000DA8FB3 /* VectorMath.swift */,
 			);
 			name = VectorMath;
 			path = ../VectorMath;
@@ -104,6 +107,7 @@
 		01B6A6331A23EF1400DA8FB3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Nick Lockwood";
 				TargetAttributes = {
@@ -147,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01B6A6661A23F08000DA8FB3 /* VectorMath.swift in Sources */,
+				FB570EF91BC49CFC00D082C8 /* VectorMath+Types.swift in Sources */,
 				01B6A6641A23F08000DA8FB3 /* VectorMath+SceneKit.swift in Sources */,
 				01B6A6651A23F08000DA8FB3 /* VectorMath+Quartz.swift in Sources */,
 				01B6A6571A23EF1400DA8FB3 /* VectorMathTests.swift in Sources */,
